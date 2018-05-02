@@ -7,7 +7,7 @@ class CreateTransactions < ActiveRecord::Migration[5.1]
       t.integer :bond_id
       t.integer :client_id
       t.integer :trader_id
-
+      t.datetime :trade_time
 
 
       t.timestamps
