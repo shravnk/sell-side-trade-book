@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr> 
+      <td><strong>Bond</strong></td>
+      <td><strong>Size</strong></td>
+      <td><strong>Trade Date</strong></td>
+      <td><strong>Trader</strong></td>
+    </tr>
+    <% @transacts.each do |transact| %>
+      <tr>
+
+        <td><%= transact.bond.name %></td>
+        <td><%= transact.size %></td>
+        <td><%= transact.trade_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -9,12 +9,16 @@ class TransactsController < ApplicationController
 
   def create
     transact = Transact.create(transact_params)
-    binding.pry
+    # binding.pry
     redirect_to transact_path(transact)
   end
 
   def show
   	@transact = Transact.find_by(id: params[:id])
+  end
+
+  def index
+  	@transacts = Transact.all
   end
 
 

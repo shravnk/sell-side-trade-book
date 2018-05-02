@@ -1,6 +1,13 @@
 <%= form_for(@transact) do |f| %>
 
   <div class="form-group">
+    <%= f.label "Buy" %>
+    <%= f.radio_button :we_buy, true %>
+    <%= f.label "Sell" %>
+    <%= f.radio_button :we_buy, false %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :size %><br>
     <%= f.number_field :size, class: "form-control" %>
   </div>
@@ -12,7 +19,7 @@
 
    <div class="form-group">
     <%= f.label :price %><br>
-    <%= f.number_field :price, class: "form-control" %>
+    <%= f.number_field :price, class: "form-control", step: 0.001 %>
   </div>
    
    <div class="form-group">
@@ -25,6 +32,11 @@
     <%= f.collection_select :client_id, Client.order(:name), :id, :name, {}, {class: "form-control"} %>
   </div>
 
+   <div class="form-group">
+    <%= f.label :trade_time %><br>
+    <%= datetime_local_field :transact, :trade_time, value: Time.now.strftime("%Y-%m-%dT%H:%M") %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
   </div>
