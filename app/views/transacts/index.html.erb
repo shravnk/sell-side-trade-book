@@ -7,17 +7,19 @@
 
   <tbody>
     <tr> 
+      <td><strong>B/S</strong></td>
       <td><strong>Bond</strong></td>
       <td><strong>Size</strong></td>
       <td><strong>Trade Date</strong></td>
-      <td><strong>Trader</strong></td>
+      <td><strong>Client</strong></td>
     </tr>
     <% @transacts.each do |transact| %>
       <tr>
-
-        <td><%= transact.bond.name %></td>
-        <td><%= transact.size %></td>
-        <td><%= transact.trade_date %></td>
+        <td><%= transact.trade_type %></td>
+        <td><%= transact.bond.print_description %></td>
+        <td><%= transact.size.to_s %></td>
+        <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
+        <td><%= transact.client.name %></td>
       </tr>
     <% end %>
   </tbody>
