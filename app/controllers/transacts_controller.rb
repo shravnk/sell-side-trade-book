@@ -1,5 +1,6 @@
 class TransactsController < ApplicationController
 
+	before_action :current_transact, only: [:show, :edit, :update]
   def new
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
@@ -14,12 +15,22 @@ class TransactsController < ApplicationController
   end
 
   def show
-  	@transact = Transact.find_by(id: params[:id])
+  	
   end
 
   def index
   	@transacts = Transact.all
   end
+
+  def edit
+
+  end
+
+  def update
+  	@transact.update(transact_params)
+  	redirect_to transact_path(@transact)
+  end
+
 
 
   private
@@ -34,5 +45,9 @@ class TransactsController < ApplicationController
        :trader_id,
        :trade_time
       )
+  end
+
+  def current_transact
+  	@transact = Transact.find_by(id: params[:id])
   end
 end
