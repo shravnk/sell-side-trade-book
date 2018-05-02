@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
-	has_many :transactions
-	has_many :bonds, through: :transactions
-	has_many :traders, through: :transactions
-	has_many :salespersons, through: :transactions
+	has_many :transacts
+	has_many :bonds, through: :transacts
+	has_many :traders, through: :transacts
+	has_many :salespersons, through: :transacts
 end

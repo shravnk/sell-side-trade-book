@@ -1,6 +1,6 @@
 class Bond < ApplicationRecord
-	has_many :transactions
-	has_many :clients, through: :transactions
-	has_many :traders, through: :transactions
-	has_many :salespersons, through: :transactions
+	has_many :transacts
+	has_many :clients, through: :transacts
+	has_many :traders, through: :transacts
+	has_many :salespeople, through: :transacts
 end
