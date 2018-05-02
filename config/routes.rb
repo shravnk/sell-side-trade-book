@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   # post '/transacts', to: 'transacts#create'
 
   resources :transacts
+  resources :traders
+
+  resources :traders, only: [:show] do 
+  	resources :transacts, only: [:show, :index] 
+  end
 end

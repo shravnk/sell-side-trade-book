@@ -19,7 +19,11 @@ class TransactsController < ApplicationController
   end
 
   def index
-  	@transacts = Transact.all
+    if params[:trader_id]
+      @transacts = Transact.where(trader_id: params[:trader_id])
+    else
+    	@transacts = Transact.all
+    end
   end
 
   def edit
