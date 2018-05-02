@@ -1,0 +1,3 @@
+class BondsController < ApplicationController
+	
+end
