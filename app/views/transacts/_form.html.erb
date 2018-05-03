@@ -24,20 +24,24 @@
    
    <div class="form-group">
     <%= f.label :trader_id %><br>
-    <%= f.collection_select :trader_id, Trader.order(:name), :id, :name, {}, {class: "form-control"} %>
+    <%= f.collection_select :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control"} %>
    </div>
 
    <div class="form-group">
     <%= f.label :client_id %><br>
-    <%= f.collection_select :client_id, Client.order(:name), :id, :name, {}, {class: "form-control"} %>
-  </div>
+    <%= f.collection_select :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"} %>
+   </div>
 
+   <div class="form-group">
+    <%= f.label :salesperson_id %><br>
+    <%= f.collection_select :salesperson_ids, Salesperson.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {multiple: true} %>
+  </div>
    <div class="form-group">
     <%= f.label :trade_time %><br>
     <%= datetime_local_field :transact, :trade_time, value: Time.now.strftime("%Y-%m-%dT%H:%M") %>
   </div>
   <br>
   <div class="actions">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit value: "Book Trade", class: "btn btn-primary" %>
   </div>
 <% end %>

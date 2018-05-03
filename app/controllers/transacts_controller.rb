@@ -1,6 +1,7 @@
 class TransactsController < ApplicationController
 
 	before_action :current_transact, only: [:show, :edit, :update]
+  
   def new
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
@@ -10,7 +11,7 @@ class TransactsController < ApplicationController
 
   def create
     transact = Transact.create(transact_params)
-    # binding.pry
+    binding.pry
     redirect_to transact_path(transact)
   end
 
@@ -47,11 +48,14 @@ class TransactsController < ApplicationController
        :bond_id,
        :client_id,
        :trader_id,
-       :trade_time
+       :trade_time,
+       salesperson_ids:[]
       )
   end
 
   def current_transact
   	@transact = Transact.find_by(id: params[:id])
   end
+
+
 end
