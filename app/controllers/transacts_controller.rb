@@ -10,9 +10,15 @@ class TransactsController < ApplicationController
   end
 
   def create
-    transact = Transact.create(transact_params)
-    binding.pry
-    redirect_to transact_path(transact)
+    @transact = Transact.new(transact_params)
+    
+    if @transact.valid?
+      # binding.pry
+      @transact.save
+      redirect_to transact_path(@transact)
+    else
+      render :new
+    end
   end
 
   def show
@@ -22,7 +28,14 @@ class TransactsController < ApplicationController
   def index
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id])
-    else
+    elsif params[:client_id]
+      
+      @transacts = Transact.where(client_id: params[:client_id])
+    elsif params[:salesperson_id]
+      @transacts = Transact.includes_salesperson(params[:salesperson_id])
+      # binding.pry
+      # .where(salesperson_id: params[:salesperson_id])
+    else 
     	@transacts = Transact.all
     end
   end

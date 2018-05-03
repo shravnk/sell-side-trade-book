@@ -11,4 +11,12 @@ Rails.application.routes.draw do
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 
   end
+
+  resources :clients, only: [:show] do 
+    resources :transacts, only: [:show, :index] 
+  end
+
+  resources :salespeople, only: [:show] do 
+    resources :transacts, only: [:show, :index] 
+  end
 end

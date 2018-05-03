@@ -18,10 +18,6 @@ class TradersController < ApplicationController
   	
   end
 
-  def view_trades
-    @user = Trader.find_by(id: params[:id])
-    redirect_to 
-  end
 
   def index
   	@traders = Trader.all
@@ -42,13 +38,7 @@ class TradersController < ApplicationController
 
   def trader_params
     params.require(:trader).permit(
-       :we_buy,
-       :size,
-       :price,
-       :bond_id,
-       :client_id,
-       :trader_id,
-       :trade_time
+      :name
       )
   end
 
