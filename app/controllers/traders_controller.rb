@@ -10,7 +10,7 @@ class TradersController < ApplicationController
 
   def create
     trader = Trader.create(trader_params)
-    # binding.pry
+    binding.pry
     redirect_to trader_path(trader)
   end
 
@@ -38,7 +38,8 @@ class TradersController < ApplicationController
 
   def trader_params
     params.require(:trader).permit(
-      :name
+      :name,
+      :password
       )
   end
 

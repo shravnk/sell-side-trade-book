@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :traders
   resources :salespeople
   resources :clients
-
+  resources :users
+  
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 
   end
