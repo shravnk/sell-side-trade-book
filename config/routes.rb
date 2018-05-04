@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :salespeople
   resources :clients
   resources :users
-  
+
+  get '/signin', to: 'sessions#new', as: 'signin'
+  post '/sessions', to: 'sessions#create', as: 'sessions'
+  delete '/sessions/', to: 'sessions#destroy'
+  root 'sessions#new'
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 
   end
