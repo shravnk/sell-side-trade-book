@@ -1,0 +1,7 @@
+<h1>All Traders</h1>
+
+<% @traders.each do |trader| %>
+
+	<%= link_to trader.name, trader_path(trader) %>
+	
+<% end %>

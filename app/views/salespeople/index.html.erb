@@ -1,0 +1,7 @@
+<h1>All Salespeople</h1>
+
+<% @salespeople.each do |sp| %>
+
+	<%= link_to sp.name, salesperson_path(sp) %>
+	
+<% end %>

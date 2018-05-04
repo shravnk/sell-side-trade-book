@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :transacts
   resources :traders
+  resources :salespeople
+  resources :clients
 
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 

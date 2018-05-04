@@ -29,12 +29,9 @@ class TransactsController < ApplicationController
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id])
     elsif params[:client_id]
-      
       @transacts = Transact.where(client_id: params[:client_id])
     elsif params[:salesperson_id]
-      @transacts = Transact.includes_salesperson(params[:salesperson_id])
-      # binding.pry
-      # .where(salesperson_id: params[:salesperson_id])
+      @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts
     else 
     	@transacts = Transact.all
     end
