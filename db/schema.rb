@@ -33,13 +33,11 @@ ActiveRecord::Schema.define(version: 6) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "salespeople_transacts", id: false, force: :cascade do |t|
-    t.integer "salesperson_id", null: false
-    t.integer "transact_id", null: false
+  create_table "salesperson_transacts", force: :cascade do |t|
+    t.integer "salesperson_id"
+    t.integer "transact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["salesperson_id"], name: "index_salespeople_transacts_on_salesperson_id"
-    t.index ["transact_id"], name: "index_salespeople_transacts_on_transact_id"
   end
 
   create_table "traders", force: :cascade do |t|
