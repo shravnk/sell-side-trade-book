@@ -12,25 +12,22 @@ class UsersController < ApplicationController
       Trader.create(trader_params)
       session[:type] = "Trader"
       binding.pry
-      redirect_to user_path(@user)
+      redirect_to home_path
     elsif @user.user_type == "Salesperson"
       Salesperson.create(salesperson_params)
       session[:type] = "Salesperson"
-      redirect_to user_path(@user) 
+      redirect_to home_path
     else
       render 'new'
     end
   end
 
-  def show
-    
-    @user = User.find_by(id: params[:id])
+
+  def home
+    @user = current_user
   end
 
-  def destroy
-    session.delete("user_id")
-    redirect_to root_path
-  end
+
 
   private
   def trader_params

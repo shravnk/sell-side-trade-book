@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   resources :clients
   resources :users
 
+  get '/home', to: 'users#home', as: 'home'
+
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions/', to: 'sessions#destroy'
-  root 'sessions#new'
+  root 'users#home'
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 
   end

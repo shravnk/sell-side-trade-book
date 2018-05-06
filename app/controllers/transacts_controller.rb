@@ -6,8 +6,9 @@ class TransactsController < ApplicationController
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
   	# @client = Client.all
-    return head(:forbidden) unless session[:type] == "Trader"
+    redirect_to transacts_path unless user_is_trader
   	@transact = Transact.new
+    @current_user = current_user
   end
 
   def create

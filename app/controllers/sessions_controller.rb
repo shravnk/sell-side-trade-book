@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       return head(:forbidden) unless @user.authenticate(params[:password])
       session[:user_id] = @user.id
       session[:type] = @user.user_type
-      redirect_to user_path(@user)
+      redirect_to home_path
     else
       render 'new'
     end
@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete("user_id")
-    redirect_to root_path
+    redirect_to signin_path
   end
 end
