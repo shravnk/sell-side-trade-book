@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  skip_before_action :require_login, only: [:new, :create]
   def new
     @user = User.new
   end
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if @user.user_type == "Trader"
       Trader.create(trader_params)
       session[:type] = "Trader"
+      binding.pry
       redirect_to user_path(@user)
     elsif @user.user_type == "Salesperson"
       Salesperson.create(salesperson_params)
@@ -22,7 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: session[:user_id])
+    
+    @user = User.find_by(id: params[:id])
   end
 
   def destroy

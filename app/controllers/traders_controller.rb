@@ -36,12 +36,7 @@ class TradersController < ApplicationController
 
   private
 
-  def trader_params
-    params.require(:trader).permit(
-      :name,
-      :password
-      )
-  end
+
 
   def current_trader
   	@trader = Trader.find_by(id: params[:id])

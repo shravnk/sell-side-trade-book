@@ -6,6 +6,7 @@ class TransactsController < ApplicationController
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
   	# @client = Client.all
+    return head(:forbidden) unless session[:type] == "Trader"
   	@transact = Transact.new
   end
 
