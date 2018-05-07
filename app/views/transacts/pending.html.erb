@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr> 
+      <td><strong>B/S</strong></td>
+      <td><strong>Bond</strong></td>
+      <td><strong>Size</strong></td>
+      <td><strong>Trade Date</strong></td>
+      <td><strong>Client</strong></td>
+    </tr>
+    <% @transacts.each do |transact| %>
+      <tr>
+        <td><%= transact.trade_type %></td>
+        <td><%= transact.bond.print_description %></td>
+        <td><%= transact.size.to_s %></td>
+        <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
+        <td><%= transact.client.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

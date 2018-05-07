@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   patch '/transacts/:id/confirm', to: 'transacts#confirm', as: 'confirm_transact'
 
+  get '/pending_transacts', to: 'transacts#pending'
+
   get '/home', to: 'users#home', as: 'home'
 
   get '/signin', to: 'sessions#new', as: 'signin'
@@ -20,8 +22,11 @@ Rails.application.routes.draw do
   delete '/sessions/', to: 'sessions#destroy'
   root 'users#home'
 
+
+
   resources :traders, only: [:show] do 
-  	resources :transacts, only: [:show, :index] 
+  	resources :transacts, only: [:show, :index]
+    get '/pending_transacts', to: 'transacts#pending' 
   end
 
 

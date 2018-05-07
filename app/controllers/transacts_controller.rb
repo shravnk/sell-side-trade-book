@@ -46,6 +46,16 @@ class TransactsController < ApplicationController
 
   end
 
+
+  def pending
+    if params[:trader_id]
+      @transacts = Transact.where(trader_id: params[:trader_id]).pending
+    else
+      @transacts = Transact.pending
+      binding.pry
+    end
+  end
+
   def edit
     if !user_is_trader
       redirect_to transact_path(@transact)

@@ -24,6 +24,10 @@ class Transact < ApplicationRecord
 		where(pending: false)
 	end
 
+	def self.pending
+		where(pending: true)
+	end
+
 	def self.includes_salesperson(id)
 		@matches = []
 		self.all.each do |transact| 

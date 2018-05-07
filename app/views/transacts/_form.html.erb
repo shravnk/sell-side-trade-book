@@ -39,7 +39,7 @@
    
    <div class="form-group">
     <%= f.label :trader_id %><br>
-    <%= f.collection_select :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: :select_trader} %>
+    <%= f.collection_select :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: select_trader} %>
    </div>
 
    <div class="form-group">
