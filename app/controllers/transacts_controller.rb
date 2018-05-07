@@ -29,7 +29,9 @@ class TransactsController < ApplicationController
 
   def confirm
     # binding.pry
-    @transact.update(pending: false)
+    if user_is_trader
+      @transact.update(pending: false)
+    end
     redirect_to transact_path(@transact)
   end
 
@@ -48,11 +50,16 @@ class TransactsController < ApplicationController
 
 
   def pending
+   
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id]).pending
+    elsif params[:salesperson_id]
+      # binding.pry
+      @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.pending
+        # binding.pry
     else
       @transacts = Transact.pending
-      binding.pry
+      
     end
   end
 

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :salespeople, only: [:show] do 
-    resources :transacts, only: [:show, :index] 
+    resources :transacts, only: [:show, :index]
+    get '/pending_transacts', to: 'transacts#pending' 
   end
 end

@@ -12,14 +12,18 @@
       <td><strong>Size</strong></td>
       <td><strong>Trade Date</strong></td>
       <td><strong>Client</strong></td>
+      <td><strong>Confirm Trade</strong></td>
+      <td><strong>Edit Trade</strong></td>
     </tr>
     <% @transacts.each do |transact| %>
       <tr>
-        <td><%= transact.trade_type %></td>
+        <td><%= link_to transact.trade_type, transact_path(transact) %></td>
         <td><%= transact.bond.print_description %></td>
         <td><%= transact.size.to_s %></td>
         <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
         <td><%= transact.client.name %></td>
+        <td><%= link_to "Confirm",confirm_transact_path(transact), method: :patch %></td>
+        <td><%= link_to "Edit", edit_transact_path(transact) %></td>
       </tr>
     <% end %>
   </tbody>

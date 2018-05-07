@@ -25,6 +25,11 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user
+    if @user.user_type == "Trader"
+      @trader = Trader.find_by(username: @user.username)
+    elsif @user.user_type == "Salesperson"
+      @salesperson = Salesperson.find_by(username: @user.username)
+    end
   end
 
 

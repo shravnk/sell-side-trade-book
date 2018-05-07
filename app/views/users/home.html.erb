@@ -1,3 +1,12 @@
 <h1>Welcome, <%= @user.name %></h1>
+<%= link_to "Book New Trade", new_transact_path %>
+<% if @trader %>
+<%= link_to "My Completed Trades", trader_transacts_path(@trader) %>
+<%= link_to "My Pending Trades", trader_pending_transacts_path(@trader) %>
+
+<% elsif @salesperson %>
+<%= link_to "My Completed Trades", salesperson_transacts_path(@salesperson) %>
+<%= link_to "My Pending Trades", salesperson_pending_transacts_path(@salesperson) %>
+<% end %>
 
 <%= link_to "Logout", sessions_path(@user), method: :delete %>
