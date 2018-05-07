@@ -11,15 +11,20 @@ Rails.application.routes.draw do
   resources :clients
   resources :users
 
+  patch '/transacts/:id/confirm', to: 'transacts#confirm', as: 'confirm_transact'
+
   get '/home', to: 'users#home', as: 'home'
 
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions/', to: 'sessions#destroy'
   root 'users#home'
+
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index] 
   end
+
+
 
   resources :clients, only: [:show] do 
     resources :transacts, only: [:show, :index] 

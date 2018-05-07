@@ -1,6 +1,8 @@
 class TradersController < ApplicationController
 
 	before_action :current_trader, only: [:show, :edit, :update]
+
+  helper_method :select_trader
   def new
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
@@ -36,9 +38,11 @@ class TradersController < ApplicationController
 
   private
 
-
-
   def current_trader
   	@trader = Trader.find_by(id: params[:id])
+  end
+
+  def select_trader
+    try(Trader.find_by(username: current_user.username).id))
   end
 end

@@ -1,19 +1,19 @@
 class TransactsController < ApplicationController
 
-	before_action :current_transact, only: [:show, :edit, :update]
+	before_action :current_transact, only: [:show, :edit, :update, :confirm]
   
   def new
   	# @bonds = Bond.all
   	# @salespeople = Salesperson.all
   	# @client = Client.all
-    redirect_to transacts_path unless user_is_trader
+    # redirect_to transacts_path unless user_is_trader
   	@transact = Transact.new
-    @current_user = current_user
+    # @current_user = current_user
   end
 
   def create
     @transact = Transact.new(transact_params)
-    
+    # binding.pry
     if @transact.valid?
       # binding.pry
       @transact.save
@@ -27,20 +27,29 @@ class TransactsController < ApplicationController
   	
   end
 
+  def confirm
+    # binding.pry
+    @transact.update(pending: false)
+    redirect_to transact_path(@transact)
+  end
+
   def index
     if params[:trader_id]
-      @transacts = Transact.where(trader_id: params[:trader_id])
+      @transacts = Transact.where(trader_id: params[:trader_id]).not_pending
     elsif params[:client_id]
-      @transacts = Transact.where(client_id: params[:client_id])
+      @transacts = Transact.where(client_id: params[:client_id]).not_pending
     elsif params[:salesperson_id]
       @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts
     else 
-    	@transacts = Transact.all
+    	@transacts = Transact.not_pending
     end
+
   end
 
   def edit
-
+    if !user_is_trader
+      redirect_to transact_path(@transact)
+    end
   end
 
   def update
@@ -61,6 +70,7 @@ class TransactsController < ApplicationController
        :client_id,
        :trader_id,
        :trade_time,
+       :pending,
        salesperson_ids:[]
       )
   end

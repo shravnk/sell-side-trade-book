@@ -20,7 +20,9 @@ class Transact < ApplicationRecord
 		end
 	end
 
-
+	def self.not_pending
+		where(pending: false)
+	end
 
 	def self.includes_salesperson(id)
 		@matches = []

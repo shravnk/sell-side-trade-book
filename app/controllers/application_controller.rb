@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	before_action :require_login
-	helper_method :current_user
+	helper_method :current_user, :user_is_trader
 private
 def require_login
 	redirect_to signin_path unless session.include? :user_id

@@ -1,1 +1,11 @@
-<h1><%= @transact.price %></h1>
+<p><%= @transact.bond.print_description %></p>
+<p><%= @transact.price %></p>
+<p><%= @transact.size %></p>
+
+<% if user_is_trader %>
+	<%= link_to "Edit Trade Details", edit_transact_path(@transact)  %>
+	<% if @transact.pending == true %>
+		<%= link_to "Confirm Trade", confirm_transact_path(@transact), method: :patch %>
+	<% end %>
+<% end %>
+
