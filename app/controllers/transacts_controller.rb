@@ -1,6 +1,6 @@
 class TransactsController < ApplicationController
 
-	before_action :current_transact, only: [:show, :edit, :update, :confirm]
+	before_action :current_transact, only: [:show, :edit, :update, :confirm, :destroy]
   
   def new
   	# @bonds = Bond.all
@@ -72,6 +72,11 @@ class TransactsController < ApplicationController
   def update
   	@transact.update(transact_params)
   	redirect_to transact_path(@transact)
+  end
+
+  def destroy
+    @transact.destroy
+    redirect_to transacts_path
   end
 
 

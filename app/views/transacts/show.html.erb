@@ -7,5 +7,6 @@
 	<% if @transact.pending == true %>
 		<%= link_to "Confirm Trade", confirm_transact_path(@transact), method: :patch %>
 	<% end %>
+	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete %>
 <% end %>
 
