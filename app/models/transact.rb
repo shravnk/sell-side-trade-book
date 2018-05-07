@@ -28,6 +28,10 @@ class Transact < ApplicationRecord
 		where(pending: true)
 	end
 
+	def self.date_sorted
+		order(:trade_time).reverse
+	end
+
 	def self.includes_salesperson(id)
 		@matches = []
 		self.all.each do |transact| 
