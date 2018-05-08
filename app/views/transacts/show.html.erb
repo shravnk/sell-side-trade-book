@@ -1,6 +1,24 @@
+<% if @transact.we_buy == true %>
+	<p>Buy</p>
+<% else %>
+	<p>Sell</p>
+<% end %>
+<p><%= @transact.size %>M</p>
 <p><%= @transact.bond.print_description %></p>
-<p><%= @transact.price %></p>
-<p><%= @transact.size %></p>
+<p>$<%= @transact.price %></p>
+
+<p>Trader: <%= @transact.trader.name %></p>
+<p>Client: <%= @transact.client.name %></p>
+<% if @transact.salespeople.any? %>
+	<p>Salespeople: </p>
+	<% @transact.salespeople.each do |sp| %>
+		<p><%= sp.name %></p>
+	<% end %>
+<% end %>
+
+<p>Trade Date: <%= @transact.trade_time.strftime('%m-%d-%y') %></p>
+
+
 
 <% if user_is_trader %>
 	<%= link_to "Edit Trade Details", edit_transact_path(@transact)  %>

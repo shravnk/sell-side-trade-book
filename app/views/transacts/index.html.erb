@@ -9,21 +9,34 @@
     <tr>
       <td><strong>B/S</strong></td>
       <td><strong>Size</strong></td>
-      <td><strong>Bond</strong></td>
+      <% if !params[:bond_id] %>
+        <td><strong>Bond</strong></td>
+      <% end %>
       <td><strong>Price</strong></td>
-      <td><strong>Trader</strong></td>
-      <td><strong>Client</strong></td>
+      <% if !params[:trader_id] %>
+        <td><strong>Trader</strong></td>
+      <% end %>
+      <% if !params[:client_id] %>
+        <td><strong>Client</strong></td>
+      <% end %>
       <td><strong>Trade Date</strong></td>
       
     </tr>
+
     <% @transacts.each do |transact| %>
       <tr>
         <td><%= link_to transact.trade_type, transact_path(transact) %></td>
         <td><%= transact.size.to_s %></td>
+        <% if !params[:bond_id] %>
         <td><%= link_to transact.bond.print_description, bond_path(transact.bond) %></td>
+        <% end %>
         <td><%= transact.price.to_s %></td>
+        <% if !params[:trader_id] %>
         <td><%= link_to transact.trader.name, trader_path(transact.trader) %></td>
+        <% end %>
+        <% if !params[:client_id] %>
         <td><%= link_to transact.client.name, client_path(transact.client) %></td>
+        <% end %>
         <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
         
       </tr>

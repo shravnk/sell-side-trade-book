@@ -1,6 +1,7 @@
 class TransactsController < ApplicationController
 
 	before_action :current_transact, only: [:show, :edit, :update, :confirm, :destroy]
+  # include Bondie::Issue
   
   def new
   	# @bonds = Bond.all
