@@ -24,7 +24,7 @@ class TransactsController < ApplicationController
   end
 
   def show
-  	
+
   end
 
   def confirm
@@ -75,7 +75,9 @@ class TransactsController < ApplicationController
   end
 
   def destroy
-    @transact.destroy
+    if user_is_trader || @transact.pending == true
+      @transact.destroy
+    end
     redirect_to transacts_path
   end
 

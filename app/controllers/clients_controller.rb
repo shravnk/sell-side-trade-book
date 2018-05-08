@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-  	
+  	   @transacts = Transact.where(client_id: params[:id]).not_pending
   end
 
   def index

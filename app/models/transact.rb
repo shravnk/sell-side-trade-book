@@ -25,11 +25,11 @@ class Transact < ApplicationRecord
 	end
 
 	def self.last_month
-		where("trade_time <?", Time.now - 30.days)
+		where("trade_time >?", Time.now - 1.months)
 	end
 
 	def self.last_quarter
-		where("trade_time <?", Time.now - 90.days)
+		where("trade_time >?", Time.now - 3.months)
 	end
 
 	def self.most_active_by_volume
@@ -44,8 +44,16 @@ class Transact < ApplicationRecord
 		group(:client_id).order('sum_size DESC').sum(:size)
 	end
 
-	def self.top_clients_by_trades
-		group(:client_id).order('count_id desc').count('id')
+	def self.top_clients_by_volume
+		group(:client_id).order('sum_size DESC').sum(:size)
+	end
+
+	def self.top_traders
+		group(:trader_id).order('sum_size DESC').sum(:size)
+	end
+
+	def self.top_salespeople
+		joins(:salesperson_transacts).group(:salesperson_id).order('sum_size DESC').sum(:size)
 	end
 
 	def self.not_pending

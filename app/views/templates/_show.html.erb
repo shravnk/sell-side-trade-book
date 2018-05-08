@@ -1,0 +1,35 @@
+<% if !@transacts.empty? %>
+<p>Total Volume: <%= @transacts.total_volume %> </p>
+<p>Total Trades: <%= @transacts.count %></p>
+<br>
+<p>Most Active Securities</p>
+<% @transacts.most_active_by_volume.each do |bond_id, volume| %>
+	<p><%= Bond.find(bond_id).print_description %>: <%= volume %></p>
+<% end %>
+<br>
+
+<% if !@client %>
+	<p>Top Clients</p>
+	<% @transacts.top_clients_by_volume.each do |client_id, volume| %>
+		<p><%= Client.find(client_id).name %>: <%= volume %></p>
+	<% end %>
+	<br>
+<% end %>
+
+<% if !@salesperson %>
+	<p>Top Salespeople</p>
+	<% @transacts.top_salespeople.each do |salesperson_id, volume| %>
+		<p><%= Salesperson.find(salesperson_id).name %>: <%= volume %></p>
+	<% end %>
+	<br>
+<% end %>
+
+<% if !@trader %>
+	<p>Top Traders</p>
+	<% @transacts.top_traders.each do |trader_id, volume| %>
+		<p><%= Trader.find(trader_id).name %>: <%= volume %></p>
+	<% end %>
+<% end %>
+
+
+<% end %>

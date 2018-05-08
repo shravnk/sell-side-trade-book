@@ -15,7 +15,8 @@ class SalespeopleController < ApplicationController
   end
 
   def show
-  	
+  	@transacts = Transact.joins(:salesperson_transacts).where(salesperson_transacts: {salesperson_id: params[:id]}).not_pending
+    
   end
 
 

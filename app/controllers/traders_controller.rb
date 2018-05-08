@@ -17,7 +17,8 @@ class TradersController < ApplicationController
   end
 
   def show
-  	
+  	@transacts = Transact.where(trader_id: params[:id]).not_pending.last_month
+    
   end
 
 
