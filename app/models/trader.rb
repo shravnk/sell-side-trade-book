@@ -4,5 +4,5 @@ class Trader < ApplicationRecord
 	has_many :clients, through: :transacts	
 	has_many :salespeople, through: :transacts
 
-	
+	validates :username, uniqueness: true
 end

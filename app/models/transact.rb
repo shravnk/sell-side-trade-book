@@ -20,6 +20,34 @@ class Transact < ApplicationRecord
 		end
 	end
 
+	def self.total_volume
+		sum("size")
+	end
+
+	def self.last_month
+		where("trade_time <?", Time.now - 30.days)
+	end
+
+	def self.last_quarter
+		where("trade_time <?", Time.now - 90.days)
+	end
+
+	def self.most_active_by_volume
+		group(:bond_id).order('sum_size DESC').sum(:size)
+	end
+
+	def self.most_active_by_trades
+		group(:bond_id).order('count_id desc').count('id')
+	end
+
+	def self.top_clients_by_volume
+		group(:client_id).order('sum_size DESC').sum(:size)
+	end
+
+	def self.top_clients_by_trades
+		group(:client_id).order('count_id desc').count('id')
+	end
+
 	def self.not_pending
 		where(pending: false)
 	end
