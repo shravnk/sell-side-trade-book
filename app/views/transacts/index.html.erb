@@ -8,18 +8,24 @@
   <tbody>
     <tr>
       <td><strong>B/S</strong></td>
-      <td><strong>Bond</strong></td>
       <td><strong>Size</strong></td>
-      <td><strong>Trade Date</strong></td>
+      <td><strong>Bond</strong></td>
+      <td><strong>Price</strong></td>
+      <td><strong>Trader</strong></td>
       <td><strong>Client</strong></td>
+      <td><strong>Trade Date</strong></td>
+      
     </tr>
     <% @transacts.each do |transact| %>
       <tr>
         <td><%= link_to transact.trade_type, transact_path(transact) %></td>
-        <td><%= transact.bond.print_description %></td>
         <td><%= transact.size.to_s %></td>
+        <td><%= link_to transact.bond.print_description, bond_path(transact.bond) %></td>
+        <td><%= transact.price.to_s %></td>
+        <td><%= link_to transact.trader.name, trader_path(transact.trader) %></td>
+        <td><%= link_to transact.client.name, client_path(transact.client) %></td>
         <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
-        <td><%= transact.client.name %></td>
+        
       </tr>
     <% end %>
   </tbody>

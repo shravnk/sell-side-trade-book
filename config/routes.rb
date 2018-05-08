@@ -9,30 +9,30 @@ Rails.application.routes.draw do
   resources :traders
   resources :salespeople
   resources :clients
-  resources :users
-
-  patch '/transacts/:id/confirm', to: 'transacts#confirm', as: 'confirm_transact'
-
-  get '/pending_transacts', to: 'transacts#pending'
+  resources :bonds, only: [:show, :index]
 
   get '/home', to: 'users#home', as: 'home'
+  get 'signup', to: 'users#new'
+
+  patch '/transacts/:id/confirm', to: 'transacts#confirm', as: 'confirm_transact'
+  get '/pending_transacts', to: 'transacts#pending'
 
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions/', to: 'sessions#destroy'
   root 'users#home'
 
-
-
   resources :traders, only: [:show] do 
   	resources :transacts, only: [:show, :index]
     get '/pending_transacts', to: 'transacts#pending' 
   end
 
-
-
   resources :clients, only: [:show] do 
     resources :transacts, only: [:show, :index] 
+  end
+
+  resources :bonds, only: [:show] do 
+    resources :transacts, only: [:show, :index]
   end
 
   resources :salespeople, only: [:show] do 

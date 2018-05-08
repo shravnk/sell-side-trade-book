@@ -38,6 +38,8 @@ class TransactsController < ApplicationController
   def index
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id]).not_pending.date_sorted
+    elsif params[:bond_id]
+      @transacts = Transact.where(bond_id: params[:bond_id]).not_pending.date_sorted
     elsif params[:client_id]
       @transacts = Transact.where(client_id: params[:client_id]).not_pending.date_sorted
     elsif params[:salesperson_id]

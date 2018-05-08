@@ -2,11 +2,14 @@
 <p>Total Volume: <%= @transacts.total_volume %> </p>
 <p>Total Trades: <%= @transacts.count %></p>
 <br>
+
+<% if !@bond %>
 <p>Most Active Securities</p>
 <% @transacts.most_active_by_volume.each do |bond_id, volume| %>
 	<p><%= Bond.find(bond_id).print_description %>: <%= volume %></p>
 <% end %>
 <br>
+<% end %>
 
 <% if !@client %>
 	<p>Top Clients</p>

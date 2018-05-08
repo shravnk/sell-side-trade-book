@@ -12,8 +12,10 @@
       <td><strong>Size</strong></td>
       <td><strong>Trade Date</strong></td>
       <td><strong>Client</strong></td>
+      <% if user_is_trader %>
       <td><strong>Confirm Trade</strong></td>
       <td><strong>Edit Trade</strong></td>
+      <% end %>
     </tr>
     <% @transacts.each do |transact| %>
       <tr>
@@ -22,8 +24,10 @@
         <td><%= transact.size.to_s %></td>
         <td><%= transact.trade_time.strftime('%m-%d-%y') %></td>
         <td><%= transact.client.name %></td>
+        <% if user_is_trader %>
         <td><%= link_to "Confirm",confirm_transact_path(transact), method: :patch %></td>
         <td><%= link_to "Edit", edit_transact_path(transact) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
