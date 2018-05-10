@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     if @user.user_type == "Trader"
       Trader.create(trader_params)
       session[:type] = "Trader"
-      binding.pry
       redirect_to home_path
     elsif @user.user_type == "Salesperson"
       Salesperson.create(salesperson_params)
@@ -30,6 +29,13 @@ class UsersController < ApplicationController
     elsif @user.user_type == "Salesperson"
       @salesperson = Salesperson.find_by(username: @user.username)
     end
+  end
+
+  def new_fb
+  end
+
+  def update
+    @user.update(user_params)
   end
 
 
@@ -53,7 +59,8 @@ class UsersController < ApplicationController
       :name,
       :username,
       :password,
-      :user_type)
+      :user_type,
+      :uid)
   end
 
 

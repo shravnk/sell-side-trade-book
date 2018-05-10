@@ -10,12 +10,14 @@ Rails.application.routes.draw do
   resources :salespeople
   resources :clients
   resources :bonds, only: [:show, :index]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :update]
 
   get '/home', to: 'users#home', as: 'home'
   get 'signup', to: 'users#new'
 
-  get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/github/callback' => 'sessions#create'
+
+  get '/users/new_fb', to: 'users#new_fb'
 
   patch '/transacts/:id/confirm', to: 'transacts#confirm', as: 'confirm_transact'
   get '/pending_transacts', to: 'transacts#pending'

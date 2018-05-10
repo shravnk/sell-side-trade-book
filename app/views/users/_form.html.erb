@@ -1,3 +1,6 @@
+<% if @user.uid %>
+<p>Please fill out the following information to complete your registration with GitHub</p>
+<% end %>
 <%= form_for @user do |f| %>
    <div class="form-group">
     <%= f.label :username %>
@@ -22,6 +25,9 @@
     <%= f.select :user_type, ["Trader", "Salesperson"], {class: "form-control"} %>
   </div>
 
+  <% if @user.uid %>
+    <%= f.hidden_field :uid, value: @user.uid %>
+  <% end %>
   <div class="actions">
     <br/>
     <%= f.submit class: "btn btn-primary" %>

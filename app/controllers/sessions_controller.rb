@@ -6,11 +6,15 @@ class SessionsController < ApplicationController
 
   def create
     if auth_hash = request.env['omniauth.auth']
-      @user = User.find_or_create_by_omniauth(auth_hash)
-      session[:user_id] = @user.id
-      session[:type] = @user.user_type
-      binding.pry
-      redirect_to home_path
+      # binding.pry
+      @user = User.find_or_create_by(uid: auth_hash[:uid])
+      if @user.user_type
+        session[:user_id] = @user.id
+        session[:type] = @user.user_type
+        redirect_to home_path
+      else
+        render '/users/new'
+      end
     else
       if  @user = User.find_by(username: params[:username])
 
