@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :bonds, only: [:show] do 
-    resources :transacts, only: [:show, :index]
+    resources :transacts, only: [:show, :index, :new, :create]
   end
 
   resources :salespeople, only: [:show] do 

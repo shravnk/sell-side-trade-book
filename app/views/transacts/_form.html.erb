@@ -13,6 +13,10 @@
   </div>
 <% end %>
 
+<% if @bond %>
+  <h3>New <%= @bond.print_description %> Trade</h3>
+<% end %>
+
 <%= form_for(@transact) do |f| %>
 
   <div class="form-group">
@@ -26,12 +30,14 @@
     <%= f.label :size %><br>
     <%= f.number_field :size, class: "form-control" %>
   </div>
-
-   <div class="form-group">
-    <%= f.label :bond_id %><br>
-    <%= f.collection_select :bond_id, Bond.order(:ticker), :id, :print_description, {}, {class: "form-control"} %>
-  </div>
-
+  <% if @bond %>
+  <%= f.hidden_field :bond_id, value: @bond.id %>
+  <% else %>
+     <div class="form-group">
+      <%= f.label :bond_id %><br>
+      <%= f.collection_select :bond_id, Bond.order(:ticker), :id, :print_description, {}, {class: "form-control"} %>
+    </div>
+  <% end %>
    <div class="form-group">
     <%= f.label :price %><br>
     <%= f.number_field :price, class: "form-control", step: 0.001 %>

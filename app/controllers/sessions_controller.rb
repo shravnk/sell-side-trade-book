@@ -17,13 +17,15 @@ class SessionsController < ApplicationController
       end
     else
       if  @user = User.find_by(username: params[:username])
-
-        return head(:forbidden) unless @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        session[:type] = @user.user_type
-        redirect_to home_path
+        if @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          session[:type] = @user.user_type
+          redirect_to home_path
+        else
+          render 'new'
+        end
       else
-        redirect_to '/login'
+        render 'new'
       end
     end
   end

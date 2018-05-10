@@ -4,10 +4,9 @@ class TransactsController < ApplicationController
   # include Bondie::Issue
   
   def new
-  	# @bonds = Bond.all
-  	# @salespeople = Salesperson.all
-  	# @client = Client.all
-    # redirect_to transacts_path unless user_is_trader
+    if params[:bond_id]
+      @bond = Bond.find_by(id: params[:bond_id])
+    end
   	@transact = Transact.new
     # @current_user = current_user
   end

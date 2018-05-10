@@ -1,4 +1,5 @@
 <h1><%= @bond.print_description %></h1>
 <p><%= link_to "View trades", bond_transacts_path(@bond) %></p>
+<p><%= link_to "Book a trade", new_bond_transact_path(@bond) %></p>
 
 <%= render 'templates/show' %>
