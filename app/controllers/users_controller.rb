@@ -1,22 +1,26 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   def new
+    redirect_to home_path unless !current_user
     @user = User.new
   end
 
   def create
-    @user = User.create(user_params)
-    session[:user_id] = @user.id
-    if @user.user_type == "Trader"
-      Trader.create(trader_params)
-      session[:type] = "Trader"
-      redirect_to home_path
-    elsif @user.user_type == "Salesperson"
-      Salesperson.create(salesperson_params)
-      session[:type] = "Salesperson"
-      redirect_to home_path
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.save
+      session[:user_id] = @user.id
+      if @user.user_type == "Trader"
+        Trader.create(trader_params)
+        session[:type] = "Trader"
+        redirect_to home_path
+      elsif @user.user_type == "Salesperson"
+        Salesperson.create(salesperson_params)
+        session[:type] = "Salesperson"
+        redirect_to home_path
+      end
     else
-      render 'new'
+      render :new
     end
   end
 

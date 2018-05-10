@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
  skip_before_action :require_login, only: [:new, :create]
   def new
+    redirect_to home_path unless !current_user
     @user = User.new
   end
 
