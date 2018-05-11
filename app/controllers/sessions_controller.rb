@@ -7,8 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     if auth_hash = request.env['omniauth.auth']
-      # binding.pry
-      @user = User.find_or_create_by(uid: auth_hash[:uid])
+       @user = User.find_or_create_by(uid: auth_hash[:uid])
       if @user.username
         session[:user_id] = @user.id
         session[:type] = @user.user_type

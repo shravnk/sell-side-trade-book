@@ -4,9 +4,6 @@ class TradersController < ApplicationController
 
  
   def new
-  	# @bonds = Bond.all
-  	# @salespeople = Salesperson.all
-  	# @client = Client.all
   	@trader = Trader.new
   end
 
@@ -34,7 +31,6 @@ class TradersController < ApplicationController
   	@trader.update(trader_params)
   	redirect_to trader_path(@trader)
   end
-
 
 
   private

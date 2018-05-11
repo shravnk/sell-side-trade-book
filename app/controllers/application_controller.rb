@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 	helper_method :current_user, :user_is_trader, :select_trader
 
 def current_user
-	# binding.pry
 	User.find_by(id: session[:user_id])
 end
 private

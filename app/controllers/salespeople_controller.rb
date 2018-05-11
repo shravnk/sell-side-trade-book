@@ -2,15 +2,11 @@ class SalespeopleController < ApplicationController
 
 	before_action :current_salesperson, only: [:show, :edit, :update]
   def new
-  	# @bonds = Bond.all
-  	# @salespeople = Salesperson.all
-  	# @client = Client.all
   	@salesperson = Salesperson.new
   end
 
   def create
     salesperson = Salesperson.create(salesperson_params)
-    # binding.pry
     redirect_to salesperson_path(salesperson)
   end
 

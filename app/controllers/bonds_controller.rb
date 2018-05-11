@@ -10,9 +10,6 @@ class BondsController < ApplicationController
   	@bonds = Bond.all
   end
 
-
-
-
   private
 
   def current_bond

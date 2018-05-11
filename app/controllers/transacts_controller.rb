@@ -8,14 +8,11 @@ class TransactsController < ApplicationController
       @bond = Bond.find_by(id: params[:bond_id])
     end
   	@transact = Transact.new
-    # @current_user = current_user
   end
 
   def create
     @transact = Transact.new(transact_params)
-    # binding.pry
     if @transact.valid?
-      # binding.pry
       @transact.save
       redirect_to transact_path(@transact)
     else
@@ -28,7 +25,6 @@ class TransactsController < ApplicationController
   end
 
   def confirm
-    # binding.pry
     if user_is_trader
       @transact.update(pending: false)
     end
@@ -56,9 +52,7 @@ class TransactsController < ApplicationController
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id]).pending
     elsif params[:salesperson_id]
-      # binding.pry
       @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.pending
-        # binding.pry
     else
       @transacts = Transact.pending
       

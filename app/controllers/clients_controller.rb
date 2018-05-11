@@ -2,15 +2,11 @@ class ClientsController < ApplicationController
 
 	before_action :current_client, only: [:show, :edit, :update]
   def new
-  	# @bonds = Bond.all
-  	# @salespeople = Salesperson.all
-  	# @client = Client.all
   	@client = Client.new
   end
 
   def create
     client = Client.create(client_params)
-    # binding.pry
     redirect_to client_path(client)
   end
 
