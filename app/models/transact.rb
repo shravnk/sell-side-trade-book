@@ -8,9 +8,16 @@ class Transact < ApplicationRecord
 
 	validates_inclusion_of :we_buy, in: [true, false]
 	validates_presence_of :size, :price, :bond_id, :client_id, :trader_id, :trade_time
+	validate :in_past
+
 
 	validates :size, :price, :numericality => {greater_than: 0}
 
+	def in_past
+	    if trade_time.present? && trade_time >= Time.zone.now
+	      errors.add(:trade_time, "Trade time must be in the past")
+	    end
+  	end
 
 	def trade_type
 		if self.we_buy

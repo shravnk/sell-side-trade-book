@@ -6,10 +6,5 @@ class Bond < ApplicationRecord
 
 	def print_description
 		"#{self.ticker} #{self.coupon.to_s}% #{self.maturity.year}"
-	end
-
-	def add_to_coupon
-		self.coupon + 1
-	end
-	
+	end	
 end
