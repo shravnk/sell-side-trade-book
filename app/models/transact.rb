@@ -2,14 +2,12 @@ class Transact < ApplicationRecord
 	belongs_to :bond
 	belongs_to :client
 	belongs_to :trader
-	# has_and_belongs_to_many :salespeople
 	has_many :salesperson_transacts
 	has_many :salespeople, through: :salesperson_transacts
 
 	validates_inclusion_of :we_buy, in: [true, false]
 	validates_presence_of :size, :price, :bond_id, :client_id, :trader_id, :trade_time
 	validate :in_past
-
 
 	validates :size, :price, :numericality => {greater_than: 0}
 
@@ -29,7 +27,6 @@ class Transact < ApplicationRecord
 
 	def bond_yield
 		Bondie::Issue.new(coupon: self.bond.coupon / 100, maturity_date: self.bond.maturity, coupon_frequency: 2).ytm(self.trade_time.to_date, price: self.price)
-
 	end
 
 	def self.total_volume
