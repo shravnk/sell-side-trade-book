@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
           session[:type] = @user.user_type
           redirect_to home_path
         else
+          
           render 'new'
         end
       else

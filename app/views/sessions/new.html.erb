@@ -1,3 +1,13 @@
+<% if @userrors.any? && !@user.uid %>
+  <div id="error_explanation">
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_tag '/sessions', method: :post do %>
    <div class="form-group">
     <%= label_tag :username %>
