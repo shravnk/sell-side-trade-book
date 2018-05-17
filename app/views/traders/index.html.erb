@@ -1,7 +1,1 @@
-<h1>All Traders</h1>
-
-<% @traders.each do |trader| %>
-
-	<%= link_to trader.name, trader_path(trader) %><br>
-	
-<% end %>
+<%= render 'templates/index', collection: @items %>

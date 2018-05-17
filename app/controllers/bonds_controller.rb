@@ -7,7 +7,7 @@ class BondsController < ApplicationController
   end
 
   def index
-  	@bonds = Bond.all
+  	@items = Bond.all
   end
 
   private

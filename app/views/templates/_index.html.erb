@@ -1,0 +1,16 @@
+<table class='table table-borderless'>
+	<tbody>
+		<% @items.each do |item| %>
+			<tr>
+				<td>
+					<% model_name = item.class.to_s.underscore %>
+					<% if item.class.name == "Bond" %>
+						<%= link_to item.print_description, send("#{model_name}_path", item) %>
+					<% else %>
+						<%= link_to item.name, send("#{model_name}_path", item) %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

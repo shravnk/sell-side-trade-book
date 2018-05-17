@@ -1,11 +1,15 @@
 <h1>Welcome, <%= @user.name %></h1>
-<%= link_to "Book New Trade", new_transact_path %>
+<span class="col-sm-4" align="center"><h4><%= link_to "Book New Trade", new_transact_path %></h4></span>
 <% if @trader %>
-<%= link_to "My Completed Trades", trader_transacts_path(@trader) %>
-<%= link_to "My Pending Trades", trader_pending_transacts_path(@trader) %>
+	
+	<span class="col-sm-4" align="center"><h4><%= link_to "My Completed Trades", trader_transacts_path(@trader) %></h4></span>
+	<span class="col-sm-4" align="center"><h4><%= link_to "My Pending Trades", trader_pending_transacts_path(@trader) %></h4></span>	
 
 <% elsif @salesperson %>
-<%= link_to "My Completed Trades", salesperson_transacts_path(@salesperson) %>
-<%= link_to "My Pending Trades", salesperson_pending_transacts_path(@salesperson) %>
-<% end %>
+	
+	<span class="col-sm-4" align="center"><h4><%= link_to "My Completed Trades", salesperson_transacts_path(@salesperson) %></h4></span>
+	<span class="col-sm-4" align="center"><h4><%= link_to "My Pending Trades", salesperson_pending_transacts_path(@salesperson) %></h4></span>	
 
+<% end %>
+<br><br><br>
+<%= render 'templates/show' %>

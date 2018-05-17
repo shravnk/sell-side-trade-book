@@ -1,6 +1,6 @@
 class TradersController < ApplicationController
 
-	before_action :current_trader, only: [:show, :edit, :update]
+	before_action :current_trader, only: [:show]
 
  
   def new
@@ -18,18 +18,8 @@ class TradersController < ApplicationController
 
 
   def index
-  	@traders = Trader.all
+  	@items = Trader.all
   end
-
-  def edit
-
-  end
-
-  def update
-  	@trader.update(trader_params)
-  	redirect_to trader_path(@trader)
-  end
-
 
   private
 

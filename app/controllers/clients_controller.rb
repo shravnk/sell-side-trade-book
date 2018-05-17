@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
   end
 
   def index
-  	@clients = Client.all
+  	@items = Client.all
   end
 
   def edit

@@ -29,8 +29,10 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.user_type == "Trader"
       @trader = Trader.find_by(username: @user.username)
+      @transacts = Transact.where(trader_id: @trader.id).not_pending
     elsif @user.user_type == "Salesperson"
       @salesperson = Salesperson.find_by(username: @user.username)
+      @transacts = Transact.joins(:salesperson_transacts).where(salesperson_transacts: {salesperson_id: @salesperson.id}).not_pending
     end
   end
 

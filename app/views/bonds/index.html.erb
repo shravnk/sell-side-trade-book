@@ -1,4 +1,2 @@
-<% @bonds.each do |bond| %>
-	<%= link_to bond.print_description, bond_path(bond) %><br>
-<% end %>
+<%= render 'templates/index', collection: @items %>
 
