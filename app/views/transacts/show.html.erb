@@ -1,22 +1,69 @@
-<% if @transact.we_buy == true %>
-	<p>Buy</p>
-<% else %>
-	<p>Sell</p>
-<% end %>
-<p><%= @transact.size %>M</p>
-<p><%= @transact.bond.print_description %></p>
-<p>$<%= @transact.price %></p>
+<div class="col-sm-8">
+<table class="table">
+  <thead>
+    <tr>
+    	<% if @transact.pending %>
+    		<th colspan="2">Pending Trade</th>
+    	<% else %>
+    		<th colspan="2">Completed Trade</th>
+    	<% end %>
+    </tr>
+  </thead>
+  <tbody>
+  	<tr>
+  		<td>Bond</td>
+  		<td><%= @transact.bond.print_description %></td>
+  	</tr>
+  	<tr>
+  		<td>Type</td>
+  		<td>
+  			<% if @transact.we_buy == true %>
+				Buy
+			<% else %>
+				Sell
+			<% end %>
+		</td>
+  	</tr>
+  	<tr>
+  		<td>Size (m)</td>
+  		<td><%= @transact.size %></td>
+  	</tr>
 
-<p>Trader: <%= @transact.trader.name %></p>
-<p>Client: <%= @transact.client.name %></p>
-<% if @transact.salespeople.any? %>
-	<p>Salespeople: </p>
-	<% @transact.salespeople.each do |sp| %>
-		<p><%= sp.name %></p>
-	<% end %>
-<% end %>
+  	<tr>
+  		<td>Price</td>
+  		<td><%= number_to_currency(@transact.price) %></td>
+  	</tr>
+  	<tr>
+  		<td>Trader</td>
+  		<td><%= @transact.trader.name %></td>
+  	</tr>
+  	<tr>
+  		<td>Client</td>
+  		<td><%= @transact.client.name %></td>
+  	</tr>
+  	<% if @transact.salespeople.any? %>
+  		<tr>
+  			<td>Salespeople</td>
+  			<td>
+  				<%= @transact.salespeople.map{|sp| sp.name}.join(", ") %>
+			</td>
+	  	</tr>
+  	<% end %>
+  	<tr>
+  		<td>Trade Time</td>
+  		<td><%= @transact.trade_time.strftime('%m-%d-%Y %H:%M:%S') %></td>
+  	</tr>
+  	<tr>
+  		<td>Created at</td>
+  		<td><%= @transact.created_at.strftime('%m-%d-%Y %H:%M:%S') %></td>
+  	</tr>
+  	<tr>
+  		<td>Last Updated</td>
+  		<td><%= @transact.updated_at.strftime('%m-%d-%Y %H:%M:%S') %></td>
+  	</tr>
+  </tbody>
+</table>
 
-<p>Trade Date: <%= @transact.trade_time.strftime('%m-%d-%y') %></p>
 
 
 
@@ -27,4 +74,4 @@
 	<% end %>
 	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete %>
 <% end %>
-
+</div>
