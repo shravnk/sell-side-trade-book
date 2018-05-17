@@ -1,4 +1,6 @@
 <h1><%= @trader.name %></h1>
-<span class="col-sm-4" align="center"><h4><%= link_to "View trades", trader_transacts_path(@trader) %></h4></span>
 
+<% if !@transacts.empty? %>
+<span class="col-sm-4" align="center"><h4><%= link_to "View trades", trader_transacts_path(@trader) %></h4></span>
+<% end %>
 <%= render 'templates/show' %>
