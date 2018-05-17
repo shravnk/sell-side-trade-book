@@ -1,7 +1,9 @@
 <% if !@transacts.empty? %>
-<p>Total Volume (m): $<%= @transacts.total_volume %> </p>
-<p>Total Trades: <%= @transacts.count %></p>
-<br>
+<!-- <div class="row"> -->
+<span class="col-sm-4" align="center"><h4>Total Volume (m): $<%= @transacts.total_volume %> </h4></span>
+<span class="col-sm-4" align="center"><h4>Total Trades: <%= @transacts.count %></h4></span>
+<!-- </div> -->
+<br><br>
 <% if !@bond %>
 	<table class="table" style="width: auto">
 	  <thead>
@@ -24,67 +26,72 @@
 	</table>
 <% end %>
 
+<% if !@client %>
+	<table class="table" style="width: auto">
+	  <thead>
+	    <tr>
+	      <th colspan="2">Top Clients</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><strong>Client</strong></td>
+	      <td><strong>Volume</strong></td>
+	    </tr>
+	    <% @transacts.top_clients_by_volume.each do |client_id, volume| %>
+	      <tr>
+	        <td><%= Client.find(client_id).name %></td>
+	        <td>$ <%= volume %></td>       
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
 
-<table class="table" style="width: auto">
-  <thead>
-    <tr>
-      <th colspan="2">Top Clients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Client</strong></td>
-      <td><strong>Volume</strong></td>
-    </tr>
-    <% @transacts.top_clients_by_volume.each do |client_id, volume| %>
-      <tr>
-        <td><%= Client.find(client_id).name %></td>
-        <td>$ <%= volume %></td>       
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !@salesperson %>
+	<table class="table" style="width: auto">
+	  <thead>
+	    <tr>
+	      <th colspan="2">Top Salespeople</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><strong>Salesperson</strong></td>
+	      <td><strong>Volume</strong></td>
+	    </tr>
+	    <% @transacts.top_salespeople.each do |salesperson_id, volume| %>
+	      <tr>
+	        <td><%= Salesperson.find(salesperson_id).name %></td>
+	        <td>$ <%= volume %></td>       
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
 
-<table class="table" style="width: auto">
-  <thead>
-    <tr>
-      <th colspan="2">Top Salespeople</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Salesperson</strong></td>
-      <td><strong>Volume</strong></td>
-    </tr>
-    <% @transacts.top_salespeople.each do |salesperson_id, volume| %>
-      <tr>
-        <td><%= Salesperson.find(salesperson_id).name %></td>
-        <td>$ <%= volume %></td>       
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !@trader %>
+	<table class="table" style="width: auto">
+	  <thead>
+	    <tr>
+	      <th colspan="2">Top Traders</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><strong>Trader</strong></td>
+	      <td><strong>Volume</strong></td>
+	    </tr>
+	    <% @transacts.top_traders.each do |trader_id, volume| %>
+	      <tr>
+	        <td><%= Trader.find(trader_id).name %></td>
+	        <td>$ <%= volume %></td>       
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
 
-<table class="table" style="width: auto">
-  <thead>
-    <tr>
-      <th colspan="2">Top Traders</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Trader</strong></td>
-      <td><strong>Volume</strong></td>
-    </tr>
-    <% @transacts.top_traders.each do |trader_id, volume| %>
-      <tr>
-        <td><%= Trader.find(trader_id).name %></td>
-        <td>$ <%= volume %></td>       
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
-
+<% else %>
+<h3>Sorry, there are no transactions to display</h3>
+<% end %>

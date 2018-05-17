@@ -1,4 +1,3 @@
 <h1><%= @client.name %></h1>
-<p><%= link_to "View trades", client_transacts_path(@client) %></p>
-
+<span class="col-sm-4" align="center"><h4><%= link_to "View trades", client_transacts_path(@client) %></h4></span>
 <%= render 'templates/show' %>

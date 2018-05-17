@@ -39,7 +39,7 @@ class TransactsController < ApplicationController
     elsif params[:client_id]
       @transacts = Transact.where(client_id: params[:client_id]).not_pending.date_sorted
     elsif params[:salesperson_id]
-      @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.date_sorted
+      @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.not_pending.date_sorted
     else 
     	@transacts = Transact.not_pending.date_sorted
     end
