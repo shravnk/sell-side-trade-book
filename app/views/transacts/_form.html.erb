@@ -13,10 +13,6 @@
   </div>
 <% end %>
 
-<% if @bond %>
-  <h3>New <%= @bond.print_description %> Trade</h3>
-<% end %>
-
 <%= form_for(@transact) do |f| %>
 <div class="row">
   <div class="col-sm-3">
