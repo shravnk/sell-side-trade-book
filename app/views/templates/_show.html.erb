@@ -3,31 +3,34 @@
 <span class="col-sm-4" align="center"><h4>Total Volume (m): $<%= @transacts.total_volume %> </h4></span>
 <span class="col-sm-4" align="center"><h4>Total Trades: <%= @transacts.count %></h4></span>
 <!-- </div> -->
-<br><br>
+<br><br><br><br>
 <% if !@bond %>
-	<table class="table" style="width: auto">
-	  <thead>
-	    <tr>
-	      <th colspan="2">Most Active Securities</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <td><strong>Bond</strong></td>
-	      <td><strong>Volume</strong></td>
-	    </tr>
-	    <% @transacts.most_active_by_volume.each do |bond_id, volume| %>
-	      <tr>
-	        <td><%= Bond.find(bond_id).print_description %></td>
-	        <td>$ <%= volume %></td>       
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+	<div class="col-sm-4" align="center">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th colspan="2">Most Active Securities</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td><strong>Bond</strong></td>
+		      <td><strong>Volume</strong></td>
+		    </tr>
+		    <% @transacts.most_active_by_volume.each do |bond_id, volume| %>
+		      <tr>
+		        <td><%= Bond.find(bond_id).print_description %></td>
+		        <td>$ <%= volume %></td>       
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
 <% end %>
 
 <% if !@client %>
-	<table class="table" style="width: auto">
+<div class="col-sm-4" align="center">
+	<table class="table">
 	  <thead>
 	    <tr>
 	      <th colspan="2">Top Clients</th>
@@ -46,10 +49,12 @@
 	    <% end %>
 	  </tbody>
 	</table>
+</div>
 <% end %>
 
 <% if !@salesperson %>
-	<table class="table" style="width: auto">
+<div class="col-sm-4" align="center">
+	<table class="table">
 	  <thead>
 	    <tr>
 	      <th colspan="2">Top Salespeople</th>
@@ -68,10 +73,12 @@
 	    <% end %>
 	  </tbody>
 	</table>
+</div>
 <% end %>
 
 <% if !@trader %>
-	<table class="table" style="width: auto">
+<div class="col-sm-4" align="center">
+	<table class="table">
 	  <thead>
 	    <tr>
 	      <th colspan="2">Top Traders</th>
@@ -90,6 +97,7 @@
 	    <% end %>
 	  </tbody>
 	</table>
+</div>
 <% end %>
 
 <% else %>
