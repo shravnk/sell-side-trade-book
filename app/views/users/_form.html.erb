@@ -2,7 +2,7 @@
 <p>Please fill out the following information to complete your registration with GitHub</p>
 <% end %>
 
-<% if @user.errors.any? %>
+<% if @user.errors.any? && !@user.uid %>
   <div id="error_explanation">
     <ul>
     <% @user.errors.full_messages.each do |msg| %>
@@ -11,6 +11,7 @@
     </ul>
   </div>
 <% end %>
+<div class="col-sm-6">
 <%= form_for @user do |f| %>
    <div class="form-group">
     <%= f.label :username %>
@@ -21,7 +22,7 @@
   <div class="form-group">
     <%= f.label "Display Name" %>
     <br>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", value: @user.name %>
   </div>
 
   <div class="form-group">
@@ -45,3 +46,4 @@
 
 
 <% end %>
+</div>
