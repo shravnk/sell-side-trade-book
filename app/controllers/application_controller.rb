@@ -20,7 +20,6 @@ def user_is_salesperson
 end
 
  def select_trader
-    
     Trader.find_by(username: current_user.username).try(:id)
   end
 

@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # post '/transacts', to: 'transacts#create'
 
   resources :transacts
-  resources :traders
-  resources :salespeople
-  resources :clients
+  resources :traders, only: [:show, :index]
+  resources :salespeople, only: [:show, :index]
+  resources :clients, only: [:show, :index]
   resources :bonds, only: [:show, :index]
   resources :users, only: [:new, :create, :update]
 
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions/', to: 'sessions#destroy'
+  
   root 'users#home'
 
   resources :traders, only: [:show] do 
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :clients, only: [:show] do 
-    resources :transacts, only: [:show, :index] 
+    resources :transacts, only: [:show, :index, :new, :create] 
   end
 
   resources :bonds, only: [:show] do 

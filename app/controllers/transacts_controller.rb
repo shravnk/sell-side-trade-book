@@ -21,7 +21,6 @@ class TransactsController < ApplicationController
   end
 
   def show
-
   end
 
   def confirm
