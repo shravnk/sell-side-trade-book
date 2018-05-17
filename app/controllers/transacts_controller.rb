@@ -6,6 +6,8 @@ class TransactsController < ApplicationController
   def new
     if params[:bond_id]
       @bond = Bond.find_by(id: params[:bond_id])
+    elsif params[:client_id]
+      @client = Client.find_by(id: params[:client_id])
     end
   	@transact = Transact.new
   end

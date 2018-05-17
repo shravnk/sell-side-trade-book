@@ -47,9 +47,13 @@
       <%= f.collection_select :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: select_trader}, {style:"width:150px; height:30px"} %>
      </div>
      <br><br>
-     <div class="form-group" style="margin-left: 25px">
-      <%= f.label :client_id %><br>
-      <%= f.collection_select :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
+      <% if @client %>
+        <%= f.hidden_field :client_id, value: @client.id %>
+      <% else %>
+        <div class="form-group" style="margin-left: 25px">
+        <%= f.label :client_id %><br>
+        <%= f.collection_select :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
+      <% end %>
      </div>
   </div>
 <div class="col-sm-3"> 
