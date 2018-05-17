@@ -76,14 +76,5 @@ class Transact < ApplicationRecord
 	def self.date_sorted
 		order(:trade_time).reverse
 	end
-
-	def self.includes_salesperson(id)
-		@matches = []
-		self.all.each do |transact| 
-			if transact.salespeople.any?{|sp| sp.id.to_s == id}
-				@matches << transact
-			end
-		end
-		@matches
-	end
+	
 end

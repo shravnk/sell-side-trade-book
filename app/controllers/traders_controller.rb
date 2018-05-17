@@ -9,13 +9,11 @@ class TradersController < ApplicationController
 
   def create
     trader = Trader.create(trader_params)
-    binding.pry
     redirect_to trader_path(trader)
   end
 
   def show
-  	@transacts = Transact.where(trader_id: params[:id]).not_pending.last_month
-    
+  	@transacts = Transact.where(trader_id: params[:id]).not_pending
   end
 
 

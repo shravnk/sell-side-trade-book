@@ -46,16 +46,13 @@ class TransactsController < ApplicationController
 
   end
 
-
   def pending
-   
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id]).pending
     elsif params[:salesperson_id]
       @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.pending
     else
       @transacts = Transact.pending
-      
     end
   end
 

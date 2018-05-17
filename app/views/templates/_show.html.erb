@@ -1,38 +1,90 @@
 <% if !@transacts.empty? %>
-<p>Total Volume: <%= @transacts.total_volume %> </p>
+<p>Total Volume (m): $<%= @transacts.total_volume %> </p>
 <p>Total Trades: <%= @transacts.count %></p>
 <br>
-
 <% if !@bond %>
-<p>Most Active Securities</p>
-<% @transacts.most_active_by_volume.each do |bond_id, volume| %>
-	<p><%= Bond.find(bond_id).print_description %>: <%= volume %></p>
-<% end %>
-<br>
-<% end %>
-
-<% if !@client %>
-	<p>Top Clients</p>
-	<% @transacts.top_clients_by_volume.each do |client_id, volume| %>
-		<p><%= Client.find(client_id).name %>: <%= volume %></p>
-	<% end %>
-	<br>
-<% end %>
-
-<% if !@salesperson %>
-	<p>Top Salespeople</p>
-	<% @transacts.top_salespeople.each do |salesperson_id, volume| %>
-		<p><%= Salesperson.find(salesperson_id).name %>: <%= volume %></p>
-	<% end %>
-	<br>
-<% end %>
-
-<% if !@trader %>
-	<p>Top Traders</p>
-	<% @transacts.top_traders.each do |trader_id, volume| %>
-		<p><%= Trader.find(trader_id).name %>: <%= volume %></p>
-	<% end %>
+	<table class="table" style="width: auto">
+	  <thead>
+	    <tr>
+	      <th colspan="2">Most Active Securities</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><strong>Bond</strong></td>
+	      <td><strong>Volume</strong></td>
+	    </tr>
+	    <% @transacts.most_active_by_volume.each do |bond_id, volume| %>
+	      <tr>
+	        <td><%= Bond.find(bond_id).print_description %></td>
+	        <td>$ <%= volume %></td>       
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
 <% end %>
 
 
-<% end %>
+<table class="table" style="width: auto">
+  <thead>
+    <tr>
+      <th colspan="2">Top Clients</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Client</strong></td>
+      <td><strong>Volume</strong></td>
+    </tr>
+    <% @transacts.top_clients_by_volume.each do |client_id, volume| %>
+      <tr>
+        <td><%= Client.find(client_id).name %></td>
+        <td>$ <%= volume %></td>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table" style="width: auto">
+  <thead>
+    <tr>
+      <th colspan="2">Top Salespeople</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Salesperson</strong></td>
+      <td><strong>Volume</strong></td>
+    </tr>
+    <% @transacts.top_salespeople.each do |salesperson_id, volume| %>
+      <tr>
+        <td><%= Salesperson.find(salesperson_id).name %></td>
+        <td>$ <%= volume %></td>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table" style="width: auto">
+  <thead>
+    <tr>
+      <th colspan="2">Top Traders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Trader</strong></td>
+      <td><strong>Volume</strong></td>
+    </tr>
+    <% @transacts.top_traders.each do |trader_id, volume| %>
+      <tr>
+        <td><%= Trader.find(trader_id).name %></td>
+        <td>$ <%= volume %></td>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
