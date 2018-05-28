@@ -39,7 +39,7 @@ class TransactsController < ApplicationController
       @entity = Trader.find(params[:trader_id])
       @transacts = @transacts.where(trader_id: params[:trader_id])
     elsif params[:bond_id]
-      @entity = Bond.find(params[:bond_id])
+      @bond = Bond.find(params[:bond_id])
       @transacts = @transacts.where(bond_id: params[:bond_id])
     elsif params[:client_id]
       @entity = Client.find(params[:client_id])

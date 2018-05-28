@@ -1,7 +1,12 @@
-<h1><%= @bond.print_description %></h1>
+<span><h1><%= @bond.print_description %></h1></span>
 
-<p><%= link_to "Book a trade", new_bond_transact_path(@bond) %></p>
-<% if !@transacts.empty? %>
-	<span class="col-sm-4" align="center"><h4><%= link_to "View trades", bond_transacts_path(@bond) %></h4></span>
-<% end %>
+	<span class="col-sm-4"><%= link_to "Book a new trade", new_bond_transact_path(@bond) %></span><br>
+
+	<% if !@transacts.empty? %>
+		<span class="col-sm-3"><h4>View trade history:</h4></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Month", bond_transacts_path(@bond, period: "one_month") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Quarter", bond_transacts_path(@bond, period: "one_quarter") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "All time", bond_transacts_path(@bond) %></h5></span>
+	<% end %>
+<br>
 <%= render 'templates/show' %>

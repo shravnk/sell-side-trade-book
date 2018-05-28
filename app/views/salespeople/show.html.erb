@@ -1,5 +1,10 @@
-<h1><%= @salesperson.name %></h1>
+<span><h1><%= @salesperson.name %></h1></span>
+
 <% if !@transacts.empty? %>
-<span class="col-sm-4" align="center"><h4><%= link_to "View trades", salesperson_transacts_path(@salesperson) %></h4></span>
+	<span class="col-sm-3"><h4>View trade history:</h4></span>
+	<span class="col-sm-3" ><h5><%= link_to "Past Month", salesperson_transacts_path(@salesperson, period: "one_month") %></h5></span>
+	<span class="col-sm-3" ><h5><%= link_to "Past Quarter", salesperson_transacts_path(@salesperson, period: "one_quarter") %></h5></span>
+	<span class="col-sm-3" ><h5><%= link_to "All time", salesperson_transacts_path(@salesperson) %></h5></span>
 <% end %>
+<br>
 <%= render 'templates/show' %>

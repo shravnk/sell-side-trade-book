@@ -1,6 +1,10 @@
-<h1><%= @trader.name %></h1>
+<span><h1><%= @trader.name %></h1></span>
 
-<% if !@transacts.empty? %>
-<span class="col-sm-4" align="center"><h4><%= link_to "View trades", trader_transacts_path(@trader) %></h4></span>
-<% end %>
+	<% if !@transacts.empty? %>
+		<span class="col-sm-3"><h4>View trade history:</h4></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Month", trader_transacts_path(@trader, period: "one_month") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Quarter", trader_transacts_path(@trader, period: "one_quarter") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "All time", trader_transacts_path(@trader) %></h5></span>
+	<% end %>
+<br>
 <%= render 'templates/show' %>
