@@ -1,12 +1,18 @@
 <%= render 'templates/index', collection: @items %>
-<p id="info"></p>
+<ul id="js-display-trades">
+	
+</ul>
 
 <script type="text/javascript">
 $(function () {
   $(".js-bond-trades").on("click", function() {
+  	$("#js-display-trades").empty()
     var bondId = parseInt($(this).attr("data-id"));
     $.get("/bonds/" + bondId + ".json", function(data) {
-      $("#info").text(data["transacts"][0]["size"]);
+      transacts = data.transacts
+      for(let transact of transacts) {
+      	$("#js-display-trades").append(`<li> ${transact.size} - ${transact.price} </li>`)
+      }
     });
   });
 });
