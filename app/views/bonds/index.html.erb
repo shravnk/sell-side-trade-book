@@ -1,20 +1,44 @@
 <%= render 'templates/index', collection: @items %>
 <div class="col-sm-6">
-<ul id="js-display-trades"></ul>
+<table class='table table-borderless' id="js-display-trades-header">
+	<thead>
+		<tr>
+			<td>Type</td>
+			<td>Size</td>
+			<td>Price</td>
+			<td>Trader</td>
+			<td>Client</td>
+		</tr>
+	</thead>
+	<tbody id="js-display-trades">
+	</tbody>
+</table>
 </div>
 
 
 <script type="text/javascript">
 $(function () {
   $(".js-bond-trades").on("click", function() {
+  	$("#js-display-trades-header").show()
   	$("#js-display-trades").empty()
     var bondId = parseInt($(this).attr("data-id"));
     $.get("/bonds/" + bondId + ".json", function(data) {
       transacts = data
       for(let transact of transacts) {
-      	$("#js-display-trades").append(`<li> ${transact.trade_type} - ${transact.size} - ${transact.price} - ${transact.trader} - ${transact.client} </li>`)
+      	$("#js-display-trades").append(`<tr>
+      		<td>${transact.trade_type}</td>
+      		<td>${transact.size}</td>
+      		<td>${transact.price}</td>
+      		<td>${transact.trader}</td>
+      		<td>${transact.client}</td></tr>`)
       }
     });
   });
 });
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	   $('#js-display-trades-header').hide();
+	});
 </script>

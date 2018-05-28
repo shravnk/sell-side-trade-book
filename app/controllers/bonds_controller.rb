@@ -6,7 +6,9 @@ class BondsController < ApplicationController
   	@transacts = Transact.where(bond_id: params[:id]).not_pending
     respond_to do |format|
       format.html {render :show}
-      format.json {render json: @transacts}
+      format.json {
+        @transacts = @transacts.last_month
+        render json: @transacts}
     end
   end
 
