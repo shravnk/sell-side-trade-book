@@ -33,18 +33,24 @@ class TransactsController < ApplicationController
   end
 
   def index
-    
-    if params[:trader_id]
-      @transacts = Transact.where(trader_id: params[:trader_id]).not_pending.date_sorted
-    elsif params[:bond_id]
-      @transacts = Transact.where(bond_id: params[:bond_id]).not_pending.date_sorted
-    elsif params[:client_id]
-      @transacts = Transact.where(client_id: params[:client_id]).not_pending.date_sorted
-    elsif params[:salesperson_id]
-      @transacts = Salesperson.find_by(id: params[:salesperson_id]).transacts.not_pending.date_sorted
-    else 
-    	@transacts = Transact.not_pending.date_sorted
+    # binding.pry
+    if params[:period] == "one_month"
+      @transacts = Transact.not_pending.last_month
+    else
+      @transacts = Transact.not_pending
     end
+
+    if params[:trader_id]
+      @transacts = @transacts.where(trader_id: params[:trader_id])
+    elsif params[:bond_id]
+      @transacts = @transacts.where(bond_id: params[:bond_id])
+    elsif params[:client_id]
+      @transacts = @transacts.where(client_id: params[:client_id])
+    elsif params[:salesperson_id]
+      @transacts = @transacts.joins(:salesperson_transacts).where(salesperson_transacts: {salesperson_id: params[:salesperson_id]})
+    end
+
+    @transacts = @transacts.date_sorted
 
   end
 
