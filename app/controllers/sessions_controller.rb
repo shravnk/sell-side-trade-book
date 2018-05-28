@@ -23,10 +23,11 @@ class SessionsController < ApplicationController
           session[:type] = @user.user_type
           redirect_to home_path
         else
-          
+          @error = "Incorrect password. Please try again."
           render 'new'
         end
       else
+        @error = "Username not found."
         render 'new'
       end
     end

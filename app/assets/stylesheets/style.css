@@ -3,3 +3,6 @@
     border: none !important;
 }
 
+#error_explanation {
+	color: red;
+}

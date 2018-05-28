@@ -33,6 +33,7 @@ class TransactsController < ApplicationController
   end
 
   def index
+    
     if params[:trader_id]
       @transacts = Transact.where(trader_id: params[:trader_id]).not_pending.date_sorted
     elsif params[:bond_id]

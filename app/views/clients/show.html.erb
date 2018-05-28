@@ -2,6 +2,7 @@
 
 <p><p><%= link_to "Book a trade", new_client_transact_path(@client) %></p></p>
 <% if !@transacts.empty? %>
-<span class="col-sm-4" align="center"><h4><%= link_to "View trades", client_transacts_path(@client) %></h4></span>
+<span class="col-sm-4" align="center"><h4><%= link_to "View one month history", client_transacts_path(@client) %></h4></span>
+<span class="col-sm-4" align="center"><h4><%= link_to "View all history", client_transacts_path(@client) %></h4></span>
 <% end %>
 <%= render 'templates/show' %>
