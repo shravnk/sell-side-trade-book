@@ -6,6 +6,7 @@
 					<% model_name = item.class.to_s.underscore %>
 					<% if item.class.name == "Bond" %>
 						<%= link_to item.print_description, send("#{model_name}_path", item) %>
+						<button class="js-bond-trades" data-id="<%= item.id %>">Recent Trades</button>
 					<% else %>
 						<%= link_to item.name, send("#{model_name}_path", item) %>
 					<% end %>

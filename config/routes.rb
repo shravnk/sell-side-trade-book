@@ -45,4 +45,5 @@ Rails.application.routes.draw do
     resources :transacts, only: [:show, :index]
     get '/pending_transacts', to: 'transacts#pending' 
   end
+
 end

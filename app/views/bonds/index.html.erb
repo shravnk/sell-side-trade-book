@@ -1,2 +1,13 @@
 <%= render 'templates/index', collection: @items %>
+<p id="info"></p>
 
+<script type="text/javascript">
+$(function () {
+  $(".js-bond-trades").on("click", function() {
+    var bondId = parseInt($(this).attr("data-id"));
+    $.get("/bonds/" + bondId + ".json", function(data) {
+      $("#info").text(data["transacts"][0]["size"]);
+    });
+  });
+});
+</script>

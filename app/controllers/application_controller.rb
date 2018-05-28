@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 def current_user
 	User.find_by(id: session[:user_id])
 end
+
 private
 def require_login
 	redirect_to signin_path unless session.include? :user_id
