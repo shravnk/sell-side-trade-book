@@ -33,20 +33,19 @@ class TransactsController < ApplicationController
   end
 
   def index
-    # binding.pry
-    if params[:period] == "one_month"
-      @transacts = Transact.not_pending.last_month
-    else
-      @transacts = Transact.not_pending
-    end
+    @transacts = get_period_transacts
 
     if params[:trader_id]
+      @entity = Trader.find(params[:trader_id])
       @transacts = @transacts.where(trader_id: params[:trader_id])
     elsif params[:bond_id]
+      @entity = Bond.find(params[:bond_id])
       @transacts = @transacts.where(bond_id: params[:bond_id])
     elsif params[:client_id]
+      @entity = Client.find(params[:client_id])
       @transacts = @transacts.where(client_id: params[:client_id])
     elsif params[:salesperson_id]
+      @entity = Salesperson.find(params[:salesperson_id])
       @transacts = @transacts.joins(:salesperson_transacts).where(salesperson_transacts: {salesperson_id: params[:salesperson_id]})
     end
 
@@ -102,6 +101,16 @@ class TransactsController < ApplicationController
 
   def current_transact
   	@transact = Transact.find_by(id: params[:id])
+  end
+
+  def get_period_transacts
+    if params[:period] == "one_month"
+      Transact.not_pending.last_month
+    elsif params[:period] == "one_quarter"
+      Transact.not_pending.last_quarter        
+    else
+      Transact.not_pending
+    end
   end
 
 

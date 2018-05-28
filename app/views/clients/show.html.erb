@@ -1,8 +1,12 @@
-<h1><%= @client.name %></h1>
+<span><h1><%= @client.name %></h1></span>
 
-<p><%= link_to "Book a trade", new_client_transact_path(@client) %></p>
-<% if !@transacts.empty? %>
-<span class="col-sm-4" align="center"><h4><%= link_to "View one month history", client_transacts_path(@client, period: "one_month") %></h4></span>
-<span class="col-sm-4" align="center"><h4><%= link_to "View all history", client_transacts_path(@client) %></h4></span>
-<% end %>
+	<span class="col-sm-4"><%= link_to "Book a new trade", new_client_transact_path(@client) %></span><br>
+
+	<% if !@transacts.empty? %>
+		<span class="col-sm-3"><h4>View trade history:</h4></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Month", client_transacts_path(@client, period: "one_month") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "Past Quarter", client_transacts_path(@client, period: "one_quarter") %></h5></span>
+		<span class="col-sm-3" ><h5><%= link_to "All time", client_transacts_path(@client) %></h5></span>
+	<% end %>
+<br>
 <%= render 'templates/show' %>

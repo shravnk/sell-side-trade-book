@@ -1,9 +1,9 @@
 <% if !@transacts.empty? %>
-<!-- <div class="row"> -->
-<span class="col-sm-4" align="center"><h4>Total Volume (m): $<%= @transacts.total_volume %> </h4></span>
-<span class="col-sm-4" align="center"><h4>Total Trades: <%= @transacts.count %></h4></span>
-<!-- </div> -->
-<br><br><br><br>
+<br>
+<br>
+<span class="col-sm-4" align="center"><h5>Total Volume (m): $<%= @transacts.total_volume %> </h5></span>
+<span class="col-sm-4" align="center"><h5>Total Trades: <%= @transacts.count %></h5></span>
+<br><br>
 <% if !@bond %>
 	<div class="col-sm-4" align="center">
 		<table class="table">
