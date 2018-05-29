@@ -25,6 +25,10 @@ class Transact < ApplicationRecord
 		end
 	end
 
+	def next_id
+	  self.class.unscoped.where("trade_time > ?", trade_time).order("trade_time ASC").first.id
+	end
+
 	def bond_yield
 		Bondie::Issue.new(coupon: self.bond.coupon / 100, maturity_date: self.bond.maturity, coupon_frequency: 2).ytm(self.trade_time.to_date, price: self.price)
 	end

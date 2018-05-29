@@ -1,5 +1,5 @@
 class TransactSerializer < ActiveModel::Serializer
-  attributes :id, :size, :price, :client, :trader, :trade_type
+  attributes :id, :size, :price, :client, :trader, :trade_type, :next_id
   belongs_to :bond
 
   def trader

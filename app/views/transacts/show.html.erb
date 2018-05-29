@@ -1,3 +1,4 @@
+<button class="js-next-transact" data-id="<%= @next_id %>">Next Trade</button>
 <div class="col-sm-8">
 <table class="table">
   <thead>
@@ -26,20 +27,20 @@
   	</tr>
   	<tr>
   		<td>Size (m)</td>
-  		<td><%= @transact.size %></td>
+  		<td id="size"><%= @transact.size %></td>
   	</tr>
 
   	<tr>
   		<td>Price</td>
-  		<td><%= number_to_currency(@transact.price) %></td>
+  		<td id="price"><%= number_to_currency(@transact.price) %></td>
   	</tr>
   	<tr>
   		<td>Trader</td>
-  		<td><%= @transact.trader.name %></td>
+  		<td id="trader"><%= @transact.trader.name %></td>
   	</tr>
   	<tr>
   		<td>Client</td>
-  		<td><%= @transact.client.name %></td>
+  		<td id="client"><%= @transact.client.name %></td>
   	</tr>
   	<% if @transact.salespeople.any? %>
   		<tr>
@@ -75,3 +76,16 @@
 	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete %>
 <% end %>
 </div>
+
+<script type="text/javascript">
+  $(".js-next-transact").on("click", function() {
+     var nextId = parseInt($(".js-next-transact").attr("data-id"));
+     $.get("/transacts/" + nextId + ".json", function(data) {
+        $("#price").text(data["price"])
+        $("#size").text(data["size"])
+        $("#trader").text(data["trader"])
+        $("#client").text(data["client"])
+        $(".js-next-transact").attr("data-id", data["next_id"])
+      })
+    })
+</script>

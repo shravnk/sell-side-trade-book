@@ -23,6 +23,7 @@ class TransactsController < ApplicationController
   end
 
   def show
+    @next_id = @transact.next_id
     respond_to do |format|
       format.html {render :show}
       format.json {render json: @transact}
@@ -84,7 +85,6 @@ class TransactsController < ApplicationController
     end
     redirect_to transacts_path
   end
-
 
 
   private
