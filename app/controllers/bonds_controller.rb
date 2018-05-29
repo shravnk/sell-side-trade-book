@@ -7,7 +7,7 @@ class BondsController < ApplicationController
     respond_to do |format|
       format.html {render :show}
       format.json {
-        @transacts = @transacts.last_month
+        @transacts = @transacts.last_month.date_sorted.limit(5)
         render json: @transacts}
     end
   end

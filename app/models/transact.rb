@@ -74,7 +74,7 @@ class Transact < ApplicationRecord
 	end
 
 	def self.date_sorted
-		order(:trade_time).reverse
+		order(trade_time: :desc)
 	end
 	
 end
