@@ -69,11 +69,11 @@
 
 
 <% if user_is_trader %>
-	<%= link_to "Edit Trade Details", edit_transact_path(@transact)  %>
+	<%= link_to "Edit Trade Details", edit_transact_path(@transact), id: "edit"%>
 	<% if @transact.pending == true %>
-		<%= link_to "Confirm Trade", confirm_transact_path(@transact), method: :patch %>
+		<%= link_to "Confirm Trade", confirm_transact_path(@transact), method: :patch, id: "confirm" %>
 	<% end %>
-	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete %>
+	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete, id: "cancel" %>
 <% end %>
 </div>
 
@@ -90,6 +90,11 @@
         $("#trade_time").text(data["trade_time"])
         $("#updated_at").text(data["updated_at"])
         $("#created_at").text(data["created_at"])
+
+        $("#edit").attr("href", `/transacts/${data["id"]}/edit`)
+        $("#cancel").attr("href", `/transacts/${data["id"]}/cancel`)
+        $("#confirm").attr("href", `/transacts/${data["id"]}/confirm`)
+
         $(".js-next-transact").attr("data-id", data["next_id"])
       })
     })
