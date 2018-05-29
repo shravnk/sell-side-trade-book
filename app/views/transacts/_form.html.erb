@@ -52,15 +52,20 @@
       <% else %>
         <div class="form-group" style="margin-left: 25px">
         <%= f.label :client_id %><br>
+
         <%= f.collection_select :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
       <% end %>
      </div>
   </div>
 <div class="col-sm-3"> 
   <br><br>
+ 
+  <% current_salesperson = current_user %>
+ 
+  
    <div class="form-group">
     <%= f.label "Salespeople" %><br>
-    <%= f.collection_select :salesperson_ids, Salesperson.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {multiple: true, style:"width:150px; height:100px"} %>
+    <%= f.collection_select :salesperson_ids, Salesperson.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: current_salesperson}, {multiple: true, style:"width:150px; height:100px"} %>
   </div>
    <div class="form-group">
     <%= f.label "Time of trade" %><br>

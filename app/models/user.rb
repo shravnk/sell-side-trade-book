@@ -11,4 +11,6 @@ class User < ApplicationRecord
 	        user.uid = auth_hash['uid']
 	  	end
 	end
+
+
 end
