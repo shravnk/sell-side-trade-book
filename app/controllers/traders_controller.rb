@@ -14,6 +14,10 @@ class TradersController < ApplicationController
 
   def show
   	@transacts = Transact.where(trader_id: params[:id]).not_pending
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @trader}
+    end
   end
 
 

@@ -11,7 +11,11 @@ class ClientsController < ApplicationController
   # end
 
   def show
-  	   @transacts = Transact.where(client_id: params[:id]).not_pending
+  	@transacts = Transact.where(client_id: params[:id]).not_pending
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @client}
+    end
   end
 
   def index
