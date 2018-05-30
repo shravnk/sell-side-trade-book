@@ -103,6 +103,7 @@
         $("#confirm").attr("href", `/transacts/${data["id"]}/confirm`)
 
         $(".js-next-transact").attr("data-id", data["next_id"])
+        $(".js-new-transact").attr("data-id", data["id"])
       })
     })
 </script>
@@ -128,10 +129,10 @@
     </div>
 
     <div>
-      <label>Bond</label>
-      <%= collection_select :transact, :bond_id, Bond.order(:ticker), :id, :print_description, {}, {class: "form-control"} %>
+      <label>Bond</label><br>
+      <%= collection_select :transact, :bond_id, Bond.order(:ticker), :id, :print_description, {include_blank: true, class: "form-control", selected: ''}, {style:"width:150px; height:30px"}%>
     </div>
-
+    <br>
     <div class="form-group">
       <label for="transact_price">Price</label><br>
       <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price" value="{{price}}">
@@ -139,12 +140,12 @@
 
     <div class="form-group">
       <label>Trader</label><br>
-      <%= collection_select :transact, :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
+      <%= collection_select :transact, :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: ''}, {style:"width:150px; height:30px"} %>
     </div>
-
+    <p>{{trader_id}}</p>
     <div>
       <label>Client</label><br>
-      <%= collection_select :transact, :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
+      <%= collection_select :transact, :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: ''}, {style:"width:150px; height:30px"} %>
     </div>
 
     <div class="form-group">
@@ -185,6 +186,12 @@
         var trade_type = data["trade_type"]
         var trader_id = data["trader"]["id"] 
         var client_id = data["client"]["id"]
+
+        var salespeople_ids = []
+        var salespeople = data.salespeople
+        for (i in salespeople) {
+          salespeople_ids.push(salespeople[i]["id"])
+        }
       
         var now = new Date()
         var trade_time = now.toISOString().substring(0, now.toISOString().length-1)
@@ -192,6 +199,10 @@
         var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
         var template = Handlebars.compile(transactFormTemplate)
         document.getElementById("duplicate").innerHTML = template(tradeDetails)
-  })
+        $("#transact_bond_id").val(bond_id)
+        $("#transact_trader_id").val(trader_id)
+        $("#transact_client_id").val(client_id)
+        $("#transact_salesperson_ids").val(salespeople_ids)
+      })
     })
 </script>
