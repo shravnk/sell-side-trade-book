@@ -26,7 +26,7 @@ class Transact < ApplicationRecord
 	end
 
 	def next_id
-	  self.class.not_pending.where("trade_time > ?", trade_time).order("trade_time ASC").first.id
+	  self.class.not_pending.where("trade_time > ?", trade_time).order("trade_time ASC").first.try(:id)
 	end
 
 	def bond_yield

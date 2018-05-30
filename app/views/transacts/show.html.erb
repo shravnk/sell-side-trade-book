@@ -87,9 +87,9 @@
         $("#size").text(data["size"])
         $("#trader").text(data["trader"])
         $("#client").text(data["client"])
-        $("#trade_time").text(data["trade_time"])
-        $("#updated_at").text(data["updated_at"])
-        $("#created_at").text(data["created_at"])
+        $("#trade_time").text(data["f_trade_time"])
+        $("#updated_at").text(data["f_updated_at"])
+        $("#created_at").text(data["f_created_at"])
 
         $("#edit").attr("href", `/transacts/${data["id"]}/edit`)
         $("#cancel").attr("href", `/transacts/${data["id"]}/cancel`)
