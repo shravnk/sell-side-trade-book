@@ -174,11 +174,12 @@
         var trader_id = data["trader"]["id"] 
         var client_id = data["client"]["id"]
       
-    var trade_time = Date()
-    var tradeDetails = {size, trade_type, price, trade_time}
-    var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
-    var template = Handlebars.compile(transactFormTemplate)
-    document.getElementById("duplicate").innerHTML = template(tradeDetails)
+        var now = new Date()
+        var trade_time = now.toISOString().substring(0, now.toISOString().length-1)
+        var tradeDetails = {size, trade_type, price, trade_time}
+        var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
+        var template = Handlebars.compile(transactFormTemplate)
+        document.getElementById("duplicate").innerHTML = template(tradeDetails)
   })
     })
 </script>
