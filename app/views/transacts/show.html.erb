@@ -127,19 +127,31 @@
       <input class="form-control" type="number" name="transact[size]" id="transact_size" value="{{size}}">
     </div>
 
+    <div>
+      <label>Bond</label>
+      <%= collection_select :transact, :bond_id, Bond.order(:ticker), :id, :print_description, {}, {class: "form-control"} %>
+    </div>
+
     <div class="form-group">
       <label for="transact_price">Price</label><br>
       <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price" value="{{price}}">
     </div>
 
     <div class="form-group">
-        <label for="transact_Salespeople">Salespeople</label><br>
-        <input name="transact[salesperson_ids][]" type="hidden" value="">
-          <select multiple="multiple" style="width:150px; height:100px" name="transact[salesperson_ids][]" id="transact_salesperson_ids">
-            <option value=""></option>
-            <option value="7">Brendan O'Dea</option>
-          </select>
+      <label>Trader</label><br>
+      <%= collection_select :transact, :trader_id, Trader.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
     </div>
+
+    <div>
+      <label>Client</label><br>
+      <%= collection_select :transact, :client_id, Client.order(:name), :id, :name, {include_blank: true, class: "form-control"}, {style:"width:150px; height:30px"} %>
+    </div>
+
+    <div class="form-group">
+        <label>Salespeople</label><br>
+        <%= collection_select :transact, :salesperson_ids, Salesperson.order(:name), :id, :name, {include_blank: true, class: "form-control", selected: select_salesperson}, {multiple: true, style:"width:150px; height:100px"} %>
+    </div>
+
     <div class="form-group">
         <label for="transact_Time of trade">Time of trade</label><br>
         <input value="{{trade_time}}" type="datetime-local" name="transact[trade_time]" id="transact_trade_time">
