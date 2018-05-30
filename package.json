@@ -1,5 +1,7 @@
 {
   "name": "sell-side-trade-book",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "handlebars": "^4.0.11"
+  }
 }
