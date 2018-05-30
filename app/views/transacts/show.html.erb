@@ -81,6 +81,7 @@
 
 <script type="text/javascript">
   $(".js-next-transact").on("click", function() {
+    $("#duplicate").empty()
      var nextId = parseInt($(".js-next-transact").attr("data-id"));
      $.get("/transacts/" + nextId + ".json", function(data) {
         var sp_names = []
@@ -111,6 +112,7 @@
 
 <script id="duplicate-transact-template" type="text/x-handlebars-template">
   <br><br>
+  <div class="col-sm-4">
   <form class="new_transact" id="new_transact" action="/transacts" accept-charset="UTF-8" method="post">
 
     <input name="utf8" type="hidden" value="✓">
@@ -125,7 +127,7 @@
 
     <div class="form-group">
       <label for="transact_Size (M)">Size (m)</label><br> 
-      <input class="form-control" type="number" name="transact[size]" id="transact_size" value="{{size}}">
+      <input class="form-control" type="number" name="transact[size]" id="transact_size" value="{{size}}" style="width:150px; height:30px">
     </div>
 
     <div>
@@ -135,7 +137,7 @@
     <br>
     <div class="form-group">
       <label for="transact_price">Price</label><br>
-      <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price" value="{{price}}">
+      <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price" value="{{price}}" style="width:150px; height:30px">
     </div>
 
     <div class="form-group">
@@ -163,6 +165,7 @@
       <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
     </div>
 </form>
+</div>
 </script>
 
 <script type="text/javascript">
@@ -195,10 +198,13 @@
       
         var now = new Date()
         var trade_time = now.toISOString().substring(0, now.toISOString().length-1)
+
         var tradeDetails = {size, trade_type, price, trade_time}
+
         var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
         var template = Handlebars.compile(transactFormTemplate)
         document.getElementById("duplicate").innerHTML = template(tradeDetails)
+
         $("#transact_bond_id").val(bond_id)
         $("#transact_trader_id").val(trader_id)
         $("#transact_client_id").val(client_id)
