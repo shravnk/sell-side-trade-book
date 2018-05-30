@@ -65,6 +65,8 @@
   </tbody>
 </table>
 
+<button class="js-new-transact">Duplicate Trade</button>
+
 
 <% if user_is_trader %>
 	<%= link_to "Edit Trade Details", edit_transact_path(@transact), id: "edit"%>
@@ -74,6 +76,8 @@
 	<%= link_to "Cancel Trade", transact_path(@transact), method: :delete, id: "cancel" %>
 <% end %>
 </div>
+
+<div class="col-sm-12" id="duplicate"></div>
 
 <script type="text/javascript">
   $(".js-next-transact").on("click", function() {
@@ -104,71 +108,31 @@
 </script>
 
 <script id="duplicate-transact-template" type="text/x-handlebars-template">
+  <br><br>
   <form class="new_transact" id="new_transact" action="/transacts" accept-charset="UTF-8" method="post">
     <input name="utf8" type="hidden" value="✓">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="form-group">
-          <label for="transact_Buy">Buy</label>
-          <input type="radio" value="true" name="transact[we_buy]" id="transact_we_buy_true" {{checkType trade_type "Buy"}}>
-          <label for="transact_Sell">Sell</label>
-          <input type="radio" value="false" name="transact[we_buy]" id="transact_we_buy_false" {{checkType trade_type "Buy"}}>
-        </div>
-
-        <div class="form-group">
-          <label for="transact_Size (M)">Size (m)</label><br> 
-          <input class="form-control" type="number" name="transact[size]" id="transact_size" value: {{size}}>
-        </div>
-           <div class="form-group">
-            <label for="transact_bond_id">Bond</label><br>
-            <select class="form-control" name="transact[bond_id]" id="transact_bond_id"><option value="7">BEEFBZ 6.5% 2026</option>
-            </select>
-          </div>
-         <div class="form-group">
-          <label for="transact_price">Price</label><br>
-          <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price">
-        </div>
-      </div>
-      <div class="col-sm-3">   
-        <br><br>
-         <div class="form-group" style="margin-left: 25px">
-          <label for="transact_trader_id">Trader</label><br>
-          <select style="width:150px; height:30px" name="transact[trader_id]" id="transact_trader_id">
-            <option value=""></option>
-            <option value="9">Brendan</option>
-            </select>
-         </div>
-         <br><br>
-         <div class="form-group" style="margin-left: 25px">
-            <label for="transact_client_id">Client</label><br>
-
-            <select style="width:150px; height:30px" name="transact[client_id]" id="transact_client_id">
-              <option value=""></option>
-              <option value="1">BlackRock</option>
-              </select>
-         </div>
-      </div>
-    <div class="col-sm-3"> 
-      <br><br>
-       <div class="form-group">
+    <div class="form-group">
+      <label for="transact_Size (M)">Size (m)</label><br> 
+      <input class="form-control" type="number" name="transact[size]" id="transact_size" value="{{size}}">
+    </div>
+    <div class="form-group">
         <label for="transact_Salespeople">Salespeople</label><br>
-        <input name="transact[salesperson_ids][]" type="hidden" value=""><select multiple="multiple" style="width:150px; height:100px" name="transact[salesperson_ids][]" id="transact_salesperson_ids">
-          <option value=""></option>
-          <option value="7">Brendan O'Dea</option>
+        <input name="transact[salesperson_ids][]" type="hidden" value="">
+          <select multiple="multiple" style="width:150px; height:100px" name="transact[salesperson_ids][]" id="transact_salesperson_ids">
+            <option value=""></option>
+            <option value="7">Brendan O'Dea</option>
           </select>
-      </div>
-       <div class="form-group">
+    </div>
+    <div class="form-group">
         <label for="transact_Time of trade">Time of trade</label><br>
         <input value="2018-05-30T13:02" type="datetime-local" name="transact[trade_time]" id="transact_trade_time">
-      </div>
     </div>
+    
+    <input value="false" type="hidden" name="transact[pending]" id="transact_pending">
+    <div class="actions">
+      <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
     </div>
-      <br>
-        <input value="false" type="hidden" name="transact[pending]" id="transact_pending">
-      <div class="actions">
-        <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
-      </div>
 </form>
 </script>
 
@@ -184,3 +148,12 @@
   }
 </script>
 
+<script type="text/javascript">
+  $(".js-new-transact").on("click", function() {
+    var size = document.getElementById("size").innerText
+    var tradeDetails = {size}
+    var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
+    var template = Handlebars.compile(transactFormTemplate)
+    document.getElementById("duplicate").innerHTML = template(tradeDetails)
+  })
+</script>

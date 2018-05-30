@@ -1,0 +1,79 @@
+<form class="new_transact" id="new_transact" action="/transacts" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="S8OQz7rkyugnWlVB6o6X7bmwDkCsmSNXhuzEDiDMkdCDpWnSWOYmYYEEcIxZRsC8a4EtDjImsVZwNxmres/YjQ==">
+<div class="row">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="transact_Buy">Buy</label>
+      <input type="radio" value="true" name="transact[we_buy]" id="transact_we_buy_true">
+      <label for="transact_Sell">Sell</label>
+      <input type="radio" value="false" name="transact[we_buy]" id="transact_we_buy_false">
+    </div>
+
+    <div class="form-group">
+      <label for="transact_Size (M)">Size (m)</label><br> 
+      <input class="form-control" type="number" name="transact[size]" id="transact_size">
+    </div>
+       <div class="form-group">
+        <label for="transact_bond_id">Bond</label><br>
+        <select class="form-control" name="transact[bond_id]" id="transact_bond_id"><option value="7">BEEFBZ 6.5% 2026</option>
+<option value="2">BRAZIL 6.0% 2026</option>
+<option value="4">COLOM 4.5% 2026</option>
+<option value="3">MEX 4.125% 2026</option>
+<option value="6">MRFGBZ 6.875% 2025</option>
+<option value="1">PEMEX 4.5% 2026</option>
+<option value="5">PETBRA 8.75% 2026</option></select>
+      </div>
+     <div class="form-group">
+      <label for="transact_price">Price</label><br>
+      <input class="form-control" step="0.001" type="number" name="transact[price]" id="transact_price">
+    </div>
+  </div>
+  <div class="col-sm-3">   
+    <br><br>
+     <div class="form-group" style="margin-left: 25px">
+      <label for="transact_trader_id">Trader</label><br>
+      <select style="width:150px; height:30px" name="transact[trader_id]" id="transact_trader_id"><option value=""></option>
+<option value="9">Brendan</option>
+<option value="8">Brendan O'Dea</option>
+<option value="2">Freddy Fennell</option>
+<option value="5">Guillermina Escudero</option>
+<option value="3">Hugo Saba</option>
+<option value="4">Melinda Prevatte</option>
+<option selected="selected" value="6">Tom Myers</option></select>
+     </div>
+     <br><br>
+        <div class="form-group" style="margin-left: 25px">
+        <label for="transact_client_id">Client</label><br>
+
+        <select style="width:150px; height:30px" name="transact[client_id]" id="transact_client_id"><option value=""></option>
+<option value="1">BlackRock</option>
+<option value="5">Capital Research</option>
+<option value="4">Prudential</option>
+<option value="2">T Rowe Price</option>
+<option value="3">Vanguard</option></select>
+     </div>
+  </div>
+<div class="col-sm-3"> 
+  <br><br>
+   <div class="form-group">
+    <label for="transact_Salespeople">Salespeople</label><br>
+    <input name="transact[salesperson_ids][]" type="hidden" value=""><select multiple="multiple" style="width:150px; height:100px" name="transact[salesperson_ids][]" id="transact_salesperson_ids"><option value=""></option>
+<option value="7">Brendan O'Dea</option>
+<option value="4">Jolyn Tagg</option>
+<option value="5">Nadene Shirkey</option>
+<option value="2">Quincy Slawson</option>
+<option value="6">Sarah Jones</option>
+<option value="1">Walton Mejorado</option>
+<option value="3">Waltraud Daniel</option></select>
+  </div>
+   <div class="form-group">
+    <label for="transact_Time of trade">Time of trade</label><br>
+    <input value="2018-05-30T14:17" type="datetime-local" name="transact[trade_time]" id="transact_trade_time">
+  </div>
+</div>
+</div>
+  <br>
+    <input value="false" type="hidden" name="transact[pending]" id="transact_pending">
+  <div class="actions">
+    <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
+  </div>
+</form>
