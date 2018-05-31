@@ -102,6 +102,9 @@ function addDuplicateTransactListener() {
         $("#transact_trader_id").val(trader_id)
         $("#transact_client_id").val(client_id)
         $("#transact_salesperson_ids").val(salespeople_ids)
+
+        var position = $("#duplicate").position();
+        scroll(0,position.top);
       })
     })
 }
