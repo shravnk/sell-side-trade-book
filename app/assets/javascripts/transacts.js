@@ -15,8 +15,8 @@ class Transact {
         $("#updated_at").text(this.data["f_updated_at"])
         $("#created_at").text(this.data["f_created_at"])
 
-        sp_names = this.createSalespersonNamesArray(data.salespeople)
-        $("#salespeople").text(this.sp_names.join(', '))
+        let sp_names = this.createSalespersonNamesArray()
+        $("#salespeople").text(sp_names)
     }
 
     setShowLinks(data) {
@@ -28,16 +28,19 @@ class Transact {
         $(".js-new-transact").attr("data-id", this.data["id"])
     }
     createSalespersonNamesArray() {
-        var sp_names = []
-        for (i in data.salespeople) {
-          sp_names.push(data.salespeople[i]["name"])
-        }
-        return sp_names
+        if (this.data.salespeople) {
+            var sp_names = []
+            for (var i in this.data.salespeople) {
+              sp_names.push(this.data.salespeople[i]["name"])
+            }
+            return sp_names.join(', ') 
+        } else {
+            return ''
+        } 
     }
 }
 
-
-$(document).ready(function() {
+$(document).on('turbolinks:load', () => {
   setCheckTypeHelper()
   addNextTransactListener()
   addDuplicateTransactListener()
