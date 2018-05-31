@@ -1,3 +1,42 @@
+class Transact {
+    constructor(data) {
+        this.data = data
+    }
+
+    setShowAttributes() {
+        $("#description").text(this.data["bond"]["description"])
+        $("#price").text(this.data["price"])
+        $("#type").text(this.data["trade_type"])
+        $("#size").text(this.data["size"])
+        $("#trader").text(this.data["trader_name"])
+        $("#client").text(this.data["client_name"])
+
+        $("#trade_time").text(this.data["f_trade_time"])
+        $("#updated_at").text(this.data["f_updated_at"])
+        $("#created_at").text(this.data["f_created_at"])
+
+        sp_names = this.createSalespersonNamesArray(data.salespeople)
+        $("#salespeople").text(this.sp_names.join(', '))
+    }
+
+    setShowLinks(data) {
+        $("#edit").attr("href", `/transacts/${this.data["id"]}/edit`)
+        $("#cancel").attr("href", `/transacts/${this.data["id"]}/cancel`)
+        $("#confirm").attr("href", `/transacts/${this.data["id"]}/confirm`)
+
+        $(".js-next-transact").attr("data-id", this.data["next_id"])
+        $(".js-new-transact").attr("data-id", this.data["id"])
+    }
+    createSalespersonNamesArray() {
+        var sp_names = []
+        for (i in data.salespeople) {
+          sp_names.push(data.salespeople[i]["name"])
+        }
+        return sp_names
+    }
+}
+
+
 $(document).ready(function() {
   setCheckTypeHelper()
   addNextTransactListener()
@@ -10,8 +49,9 @@ function addNextTransactListener() {
      var nextId = parseInt($(".js-next-transact").attr("data-id"));
      if (nextId) {
      $.get("/transacts/" + nextId + ".json", function(data) {
-        setTransactAttributes(data)
-        setTransactLinks(data)
+        transact = new Transact(data)
+        transact.setShowAttributes()
+        transact.setShowLinks()
     })
     } else {alert("This is the most recent trade.")}
     })
@@ -25,39 +65,6 @@ function setCheckTypeHelper() {
             return ""
           }
     })
-}
-
-function createSalespersonNamesArray(salespeople) {
-    var sp_names = []
-    for (i in salespeople) {
-      sp_names.push(salespeople[i]["name"])
-    }
-    return sp_names
-}
-
-function setTransactAttributes(data) {
-        $("#description").text(data["bond"]["description"])
-        $("#price").text(data["price"])
-        $("#type").text(data["trade_type"])
-        $("#size").text(data["size"])
-        $("#trader").text(data["trader_name"])
-        $("#client").text(data["client_name"])
-
-        $("#trade_time").text(data["f_trade_time"])
-        $("#updated_at").text(data["f_updated_at"])
-        $("#created_at").text(data["f_created_at"])
-
-        sp_names = createSalespersonNamesArray(data.salespeople)
-        $("#salespeople").text(sp_names.join(', '))
-}
-
-function setTransactLinks(data) {
-        $("#edit").attr("href", `/transacts/${data["id"]}/edit`)
-        $("#cancel").attr("href", `/transacts/${data["id"]}/cancel`)
-        $("#confirm").attr("href", `/transacts/${data["id"]}/confirm`)
-
-        $(".js-next-transact").attr("data-id", data["next_id"])
-        $(".js-new-transact").attr("data-id", data["id"])
 }
 
 function addDuplicateTransactListener() {
@@ -93,4 +100,5 @@ function addDuplicateTransactListener() {
       })
     })
 }
+
 
