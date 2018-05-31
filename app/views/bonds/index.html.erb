@@ -1,6 +1,6 @@
 <%= render 'templates/index', collection: @items %>
 <div class="col-sm-6">
-<table class='table table-borderless' id="js-display-trades-header">
+<table class='table table-borderless' id="js-display-trades-header" hidden>
 	<caption>Recent Trades</caption>
 	<thead>
 		<tr>
@@ -15,37 +15,3 @@
 	</tbody>
 </table>
 </div>
-
-
-<script type="text/javascript">
-$(function () {
-  $(".js-bond-trades").mouseenter(function() {
-  	$(this).css("background-color", "#d8e7ff")
-  	$("#js-display-trades-header").show()
-  	$("#js-display-trades").empty()
-    var bondId = parseInt($(this).attr("data-id"));
-    $.get("/bonds/" + bondId + ".json").done(function(data) {
-      transacts = data
-      for(let transact of transacts) {
-      	$("#js-display-trades").append(`<tr>
-      		<td>${transact.trade_type}</td>
-      		<td>${transact.size}</td>
-      		<td>${transact.price}</td>
-      		<td>${transact.trader}</td>
-      		<td>${transact.client}</td></tr>`)
-      };
-    });
-  });
-  $(".js-bond-trades").mouseleave(function () {
-  $(this).css("background-color", "white");
-  $("#js-display-trades").empty()
-  $("#js-display-trades-header").hide()
-});
-});
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-	   $('#js-display-trades-header').hide();
-	});
-</script>
