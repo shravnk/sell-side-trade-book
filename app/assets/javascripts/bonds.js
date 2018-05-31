@@ -1,29 +1,42 @@
-$( () => {
-  var displayTradesTemplate = document.getElementById("display-trades-template").innerHTML
-  var template = Handlebars.compile(displayTradesTemplate)
-  var requestId = 0
-  
-  $(".js-bond-trades").mouseenter(function() {
-    var that = this
-    $(this).css("background-color", "#d8e7ff")
-    timer = setTimeout(function() {
-        var bondId = parseInt($(that).attr("data-id"));
-        var thisRequestId = requestId
-        $.get("/bonds/" + bondId + ".json").done(function(data) {
-          transacts = data
-          if (thisRequestId == requestId) {
-              document.getElementById("js-display-trades-column").innerHTML = template(transacts)
-            }
-          });
-      }, 100);
-      }).mouseleave(function () {
-        clearTimeout(timer)
-        requestId += 1
-        $(this).css("background-color", "white");
-        $("#js-display-trades").empty()
-        $("#js-display-trades-header").hide()
+$(document).ready(function() {
+  window.requestId = 0
+  addEventListeners()
+  });
+
+function  bondRowEnter(event) {
+  row = event.currentTarget
+  $(row).css("background-color", "#d8e7ff")
+  var template = compileDisplayTradesTemplate()
+  setTimeout(function() {
+    var bondId = parseInt($(row).attr("data-id"));
+    var thisRequestId = window.requestId
+    $.get("/bonds/" + bondId + ".json").done(function(data) {
+      transacts = data
+      if (thisRequestId == requestId) {
+          $("#js-display-trades-column").html(template(transacts))
+        }
       });
+  }, 100);
+}
 
-    })
+function bondRowExit(event) {
+  row = event.currentTarget
+  requestId += 1
+  resetBondsPage(row)
+}
 
+function addEventListeners() {
+  var bondRow = $('.js-bond-trades')
+  bondRow.on("mouseenter" , bondRowEnter )
+  bondRow.on("mouseleave" , bondRowExit )
+}
 
+function compileDisplayTradesTemplate() {
+  var displayTradesTemplate = $("#display-trades-template").html()
+  return Handlebars.compile(displayTradesTemplate)
+}
+
+function resetBondsPage(highlightedRow) {
+  $(highlightedRow).css("background-color", "white");
+  $("#js-display-trades-column").empty()
+}
