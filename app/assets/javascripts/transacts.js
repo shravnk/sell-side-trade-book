@@ -21,7 +21,9 @@ class Transact {
 
     setShowLinks(data) {
         $("#edit").attr("href", `/transacts/${this.data["id"]}/edit`)
-        $("#cancel").attr("href", `/transacts/${this.data["id"]}/cancel`)
+        $("#cancel").attr("href", `/transacts/${this.data["id"]}`)
+        $("#cancel").attr("data-method", "delete")
+
         $("#confirm").attr("href", `/transacts/${this.data["id"]}/confirm`)
 
         $(".js-next-transact").attr("data-id", this.data["next_id"])
@@ -95,12 +97,29 @@ function addDuplicateTransactListener() {
         var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
         var template = Handlebars.compile(transactFormTemplate)
         document.getElementById("duplicate").innerHTML = template(tradeDetails)
-
+        addDuplicateFormHandler()
         $("#transact_bond_id").val(bond_id)
         $("#transact_trader_id").val(trader_id)
         $("#transact_client_id").val(client_id)
         $("#transact_salesperson_ids").val(salespeople_ids)
       })
+    })
+}
+
+function addDuplicateFormHandler () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+      let tradeDetails = $(this).serialize();
+      let posting = $.post('/transacts', tradeDetails);
+      posting.done(function(data) {
+          transact = new Transact(data)
+          transact.setShowAttributes()
+          transact.setShowLinks()
+      }).done(
+      $(function() {
+        $("#duplicate").empty() 
+      })
+      )
     })
 }
 

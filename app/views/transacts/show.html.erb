@@ -134,26 +134,9 @@
     
     <input value="false" type="hidden" name="transact[pending]" id="transact_pending">
     <div class="actions">
-      <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
+    <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
     </div>
 </form>
 </div>
 </script>
 
-<script type="text/javascript">
-  $(function () {
-    $('form').submit(function(event) {
-      event.preventDefault();
-      let trade_details = $(this).serialize();
-      let posting = $.post('/transacts', values);
-      posting.done(function(data) {
-        let newId = data["id"]
-        $.get("/transacts/" + newId + ".json", function(data) {
-          transact = new Transact(data)
-          transact.setShowAttributes()
-          transact.setShowLinks()
-        })
-      })
-    })
-  })
-</script>
