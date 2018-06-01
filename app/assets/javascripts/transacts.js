@@ -93,7 +93,6 @@ function addDuplicateTransactListener() {
         var trade_time = now.toISOString().substring(0, now.toISOString().length-1)
 
         var tradeDetails = {size, trade_type, price, trade_time}
-
         var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
         var template = Handlebars.compile(transactFormTemplate)
         document.getElementById("duplicate").innerHTML = template(tradeDetails)
@@ -118,6 +117,7 @@ function addDuplicateFormHandler () {
           transact = new Transact(data)
           transact.setShowAttributes()
           transact.setShowLinks()
+          // $('.container').prepend("<p> Successfully booked new trade.")
       }).done(
       $(function() {
         $("#duplicate").empty() 

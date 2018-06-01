@@ -16,9 +16,10 @@ class TransactsController < ApplicationController
     @transact = Transact.new(transact_params)
     if @transact.valid?
       @transact.save
-      respond_to do |format|
-        format.html {render :show}
-        format.json {render json: @transact, status: 201}
+      if params[:id]
+        redirect_to transact_path(@transact)
+      else
+        render json: @transact, status: 201
       end
     else
       render :new

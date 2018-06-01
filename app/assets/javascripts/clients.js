@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', () => {
+if($('#display-client-trades-template').length >0 ){
   addRecentActivityListener()
-
+}
  });
 
 function addRecentActivityListener() {
