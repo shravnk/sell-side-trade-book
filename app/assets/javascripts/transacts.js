@@ -117,7 +117,7 @@ function addDuplicateFormHandler () {
           transact = new Transact(data)
           transact.setShowAttributes()
           transact.setShowLinks()
-          // $('.container').prepend("<p> Successfully booked new trade.")
+          $("#js-transact-success-message").html("<strong>Successfully booked new trade.</strong>")
       }).done(
       $(function() {
         $("#duplicate").empty() 
