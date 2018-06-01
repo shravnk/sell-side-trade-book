@@ -4,11 +4,11 @@
     <title>Bond Desk</title>
 
     <%= csrf_meta_tags %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag 'style', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
+     
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">

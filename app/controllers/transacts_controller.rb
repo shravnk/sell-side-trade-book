@@ -16,7 +16,10 @@ class TransactsController < ApplicationController
     @transact = Transact.new(transact_params)
     if @transact.valid?
       @transact.save
-      render json: @transact, status: 201
+      respond_to do |format|
+        format.html {render :show}
+        format.json {render json: @transact, status: 201}
+      end
     else
       render :new
     end
@@ -49,6 +52,13 @@ class TransactsController < ApplicationController
     elsif params[:client_id]
       @entity = Client.find(params[:client_id])
       @transacts = @transacts.where(client_id: params[:client_id])
+      respond_to do |format|
+        format.html {
+          render :index}
+        format.json {
+          @transacts = @transacts.date_sorted.limit(5)
+          render json: @transacts}
+      end
     elsif params[:salesperson_id]
       @entity = Salesperson.find(params[:salesperson_id])
       @transacts = @transacts.joins(:salesperson_transacts).where(salesperson_transacts: {salesperson_id: params[:salesperson_id]})

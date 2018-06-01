@@ -5,8 +5,8 @@ class BondsController < ApplicationController
   def show
   	
     respond_to do |format|
+      @transacts = Transact.where(bond_id: params[:id]).not_pending
       format.html {
-        @transacts = Transact.where(bond_id: params[:id]).not_pending
         render :show}
       format.json {
         @transacts = @transacts.last_month.date_sorted.limit(5)

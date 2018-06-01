@@ -1,9 +1,9 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', () => {
   window.requestId = 0
   addEventListeners()
   });
 
-function  bondRowEnter(event) {
+function bondRowEnter(event) {
   row = event.currentTarget
   $(row).css("background-color", "#d8e7ff")
   var template = compileDisplayTradesTemplate()
