@@ -2,7 +2,7 @@ class TransactsController < ApplicationController
 
 	before_action :current_transact, only: [:show, :edit, :update, :confirm, :destroy]
   # include Bondie::Issue
-  
+
   def new
     if params[:bond_id]
       @bond = Bond.find_by(id: params[:bond_id])
@@ -16,10 +16,10 @@ class TransactsController < ApplicationController
     @transact = Transact.new(transact_params)
     if @transact.valid?
       @transact.save
-      if params[:id]
-        redirect_to transact_path(@transact)
+			if params[:no_reload]
+				render json: @transact, status: 201
       else
-        render json: @transact, status: 201
+        redirect_to transact_path(@transact)
       end
     else
       render :new
@@ -122,7 +122,7 @@ class TransactsController < ApplicationController
     if params[:period] == "one_month"
       Transact.not_pending.last_month
     elsif params[:period] == "one_quarter"
-      Transact.not_pending.last_quarter        
+      Transact.not_pending.last_quarter
     else
       Transact.not_pending
     end

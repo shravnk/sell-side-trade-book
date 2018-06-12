@@ -35,10 +35,10 @@ class Transact {
             for (var i in this.data.salespeople) {
               sp_names.push(this.data.salespeople[i]["name"])
             }
-            return sp_names.join(', ') 
+            return sp_names.join(', ')
         } else {
             return ''
-        } 
+        }
     }
 }
 
@@ -80,7 +80,7 @@ function addDuplicateTransactListener() {
         var size = data["size"]
         var price = data["price"]
         var trade_type = data["trade_type"]
-        var trader_id = data["trader"]["id"] 
+        var trader_id = data["trader"]["id"]
         var client_id = data["client"]["id"]
 
         var salespeople_ids = []
@@ -88,9 +88,9 @@ function addDuplicateTransactListener() {
         for (i in salespeople) {
           salespeople_ids.push(salespeople[i]["id"])
         }
-      
+
         var now = new Date()
-        var trade_time = now.toISOString().substring(0, now.toISOString().length-1)
+        var trade_time = toISOLocal(now).substring(0, toISOLocal(now).length-1)
 
         var tradeDetails = {size, trade_type, price, trade_time}
         var transactFormTemplate = document.getElementById("duplicate-transact-template").innerHTML
@@ -120,10 +120,19 @@ function addDuplicateFormHandler () {
           $("#js-transact-success-message").html("<strong>Successfully booked new trade.</strong>")
       }).done(
       $(function() {
-        $("#duplicate").empty() 
+        $("#duplicate").empty()
       })
       )
     })
 }
 
+function toISOLocal(d) {
+  var z = n => (n<10? '0':'')+n;
+  var off = d.getTimezoneOffset();
+  var sign = off < 0? '+' : '-';
+  off = Math.abs(off);
 
+  return d.getFullYear() + '-' + z(d.getMonth()+1) + '-' +
+         z(d.getDate()) + 'T' + z(d.getHours()) + ':'  + z(d.getMinutes()) +
+         ':' + z(d.getSeconds()) + '.' + z(off/60|0) + z(off%60);
+}

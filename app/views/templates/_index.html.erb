@@ -8,7 +8,6 @@
 		<% @items.each do |item| %>
 			<tr>
 				<td data-id="<%= item.id %>" class="js-<%= model_name %>-trades">
-					
 					<% if item.class.name == "Bond" %>
 						<%= link_to item.print_description, send("#{model_name}_path", item) %>
 						<!-- <button class="js-bond-trades" data-id="<%= item.id %>">Recent Trades</button> -->

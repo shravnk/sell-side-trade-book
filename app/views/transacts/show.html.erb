@@ -99,7 +99,7 @@
     </div>
 
     <div class="form-group">
-      <label for="transact_Size (M)">Size (m)</label><br> 
+      <label for="transact_Size (M)">Size (m)</label><br>
       <input class="form-control" type="number" name="transact[size]" id="transact_size" value="{{size}}" style="width:150px; height:30px">
     </div>
 
@@ -132,12 +132,12 @@
         <label for="transact_Time of trade">Time of trade</label><br>
         <input value="{{trade_time}}" type="datetime-local" name="transact[trade_time]" id="transact_trade_time">
     </div>
-    
+
     <input value="false" type="hidden" name="transact[pending]" id="transact_pending">
+    <input value="true" type="hidden" name="no_reload">
     <div class="actions">
     <input type="submit" name="commit" value="Book Trade" class="btn btn-primary" data-disable-with="Create Transact">
     </div>
 </form>
 </div>
 </script>
-
