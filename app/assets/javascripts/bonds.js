@@ -10,7 +10,7 @@ function bondRowEnter(event) {
   setTimeout(function() {
     var bondId = parseInt($(row).attr("data-id"));
     var thisRequestId = window.requestId
-    $.get("/bonds/" + bondId + ".json").done(function(data) {
+    $.get("/bonds/" + bondId + "/transacts.json").done(function(data) {
       transacts = data
       if (thisRequestId == requestId) {
           $("#js-display-trades-column").html(template(transacts))

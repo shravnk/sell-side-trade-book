@@ -50,6 +50,13 @@ class TransactsController < ApplicationController
     elsif params[:bond_id]
       @bond = Bond.find(params[:bond_id])
       @transacts = @transacts.where(bond_id: params[:bond_id])
+			respond_to do |format|
+			format.html {
+				render :show}
+			format.json {
+				@transacts = @transacts.last_month.date_sorted.limit(5)
+				render json: @transacts }
+			end
     elsif params[:client_id]
       @entity = Client.find(params[:client_id])
       @transacts = @transacts.where(client_id: params[:client_id])
