@@ -1,5 +1,6 @@
 <span><h1><%= @trader.name %></h1></span>
-
+<p><button id="trader-bonds-js" data-id="<%= @trader.id %>">Bonds I Trade</button></p>
+<div id="bonds-i-trade"></div>
 	<% if !@transacts.empty? %>
 		<span class="col-sm-3"><h4>View trade history:</h4></span>
 		<span class="col-sm-3" ><h5><%= link_to "Past Month", trader_transacts_path(@trader, period: "one_month") %></h5></span>
@@ -8,3 +9,16 @@
 	<% end %>
 <br>
 <%= render 'templates/show' %>
+
+<script id="display-trader-bonds-template" type="text/x-handlebars-template">
+	<table class='table table-borderless' id="js-display-trades-header">
+
+		<tbody>
+	    {{#each this}}
+	        <tr>            
+	            <td>{{description}}</td>
+	        </tr>
+	    {{/each}}
+		</tbody>
+	</table>
+</script>

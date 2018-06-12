@@ -25,25 +25,26 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/sessions', to: 'sessions#create', as: 'sessions'
   delete '/sessions/', to: 'sessions#destroy'
-  
+
   root 'users#home'
 
-  resources :traders, only: [:show] do 
+  resources :traders, only: [:show] do
   	resources :transacts, only: [:show, :index]
-    get '/pending_transacts', to: 'transacts#pending' 
+    resources :bonds, only: [:index]
+    get '/pending_transacts', to: 'transacts#pending'
   end
 
-  resources :clients, only: [:show] do 
-    resources :transacts, only: [:show, :index, :new, :create] 
-  end
-
-  resources :bonds, only: [:show] do 
+  resources :clients, only: [:show] do
     resources :transacts, only: [:show, :index, :new, :create]
   end
 
-  resources :salespeople, only: [:show] do 
+  resources :bonds, only: [:show] do
+    resources :transacts, only: [:show, :index, :new, :create]
+  end
+
+  resources :salespeople, only: [:show] do
     resources :transacts, only: [:show, :index]
-    get '/pending_transacts', to: 'transacts#pending' 
+    get '/pending_transacts', to: 'transacts#pending'
   end
 
 end

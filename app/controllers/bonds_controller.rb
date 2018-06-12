@@ -3,17 +3,18 @@ class BondsController < ApplicationController
 	before_action :current_bond, only: [:show,]
 
   def show
-    respond_to do |format|
+
       @transacts = Transact.where(bond_id: params[:id]).not_pending
-      format.html {
-        render :show}
-      format.json {
-        render json: @transacts}
-    end
+
   end
 
   def index
-  	@items = Bond.all
+		if params[:trader_id]
+			@bonds = Trader.find(params[:trader_id]).bonds.uniq
+			render json: @bonds
+		else
+			@items = Bond.all
+		end
   end
 
   private
