@@ -4,15 +4,15 @@ $(document).on('turbolinks:load', () => {
   });
 
 function bondRowEnter(event) {
-  row = event.currentTarget
+  const row = event.currentTarget
   $(row).css("background-color", "#d8e7ff")
-  var template = compileDisplayTradesTemplate()
+  const template = compileDisplayTradesTemplate()
   setTimeout(function() {
-    var bondId = parseInt($(row).attr("data-id"));
-    var thisRequestId = window.requestId
-    $.get("/bonds/" + bondId + "/transacts.json").done(function(data) {
-      transacts = data
-      if (thisRequestId == requestId) {
+    const bondId = parseInt($(row).attr("data-id"));
+    const thisRequestId = window.requestId
+    $.get(`/bonds/${bondId}/transacts.json`).done(function(data) {
+      var transacts = data
+      if (thisRequestId === requestId) {
           $("#js-display-trades-column").html(template(transacts))
         }
       });
@@ -20,7 +20,7 @@ function bondRowEnter(event) {
 }
 
 function bondRowExit(event) {
-  row = event.currentTarget
+  const row = event.currentTarget
   requestId += 1
   resetBondsPage(row)
 }

@@ -1,39 +1,51 @@
 class Transact {
     constructor(data) {
-        this.data = data
+        this.id = data.id
+        this.nextId = data.next_id
+        this.description = data.bond.description
+        this.price = data.price
+        this.type = data.trade_type
+        this.size = data.size
+        this.trader = data.trader_name
+        this.client = data.client_name
+        this.tradeTime = data.f_trade_time
+        this.updatedAt = data.f_updated_at
+        this.createdAt = data.f_created_at
+        this.salespeople = data.salespeople
+        this.spNames = this.createSalespersonNamesArray()
+
     }
 
     setShowAttributes() {
-        $("#description").text(this.data["bond"]["description"])
-        $("#price").text(this.data["price"])
-        $("#type").text(this.data["trade_type"])
-        $("#size").text(this.data["size"])
-        $("#trader").text(this.data["trader_name"])
-        $("#client").text(this.data["client_name"])
+        $("#description").text(this.description)
+        $("#price").text(this.price)
+        $("#type").text(this.type)
+        $("#size").text(this.size)
+        $("#trader").text(this.trader)
+        $("#client").text(this.client)
 
-        $("#trade_time").text(this.data["f_trade_time"])
-        $("#updated_at").text(this.data["f_updated_at"])
-        $("#created_at").text(this.data["f_created_at"])
+        $("#trade_time").text(this.tradeTime)
+        $("#updated_at").text(this.updatedAt)
+        $("#created_at").text(this.createdAt)
 
-        let sp_names = this.createSalespersonNamesArray()
-        $("#salespeople").text(sp_names)
+        $("#salespeople").text(spNames)
     }
 
     setShowLinks(data) {
-        $("#edit").attr("href", `/transacts/${this.data["id"]}/edit`)
-        $("#cancel").attr("href", `/transacts/${this.data["id"]}`)
+        $("#edit").attr("href", `/transacts/${this.id}/edit`)
+        $("#cancel").attr("href", `/transacts/${this.id}`)
         $("#cancel").attr("data-method", "delete")
 
-        $("#confirm").attr("href", `/transacts/${this.data["id"]}/confirm`)
+        $("#confirm").attr("href", `/transacts/${this.id}/confirm`)
 
-        $(".js-next-transact").attr("data-id", this.data["next_id"])
-        $(".js-new-transact").attr("data-id", this.data["id"])
+        $(".js-next-transact").attr("data-id", this.nextId)
+        $(".js-new-transact").attr("data-id", this.id)
     }
     createSalespersonNamesArray() {
-        if (this.data.salespeople) {
+        if (this.salespeople) {
             var sp_names = []
-            for (var i in this.data.salespeople) {
-              sp_names.push(this.data.salespeople[i]["name"])
+            for (var i in this.salespeople) {
+              sp_names.push(this.salespeople[i]["name"])
             }
             return sp_names.join(', ')
         } else {
